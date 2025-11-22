@@ -17,6 +17,7 @@ import ShopDirectory from './pages/user/ShopDirectory'
 import ShopDetail from './pages/user/ShopDetail'
 import CommunityReviews from './pages/user/CommunityReviews'
 import Loyalty from './pages/user/Loyalty'
+import MyBills from './pages/user/MyBills'
 
 // Seller Pages
 import SellerDashboard from './pages/seller/SellerDashboard'
@@ -112,6 +113,16 @@ function App() {
             <PrivateRoute>
               <Layout>
                 <Loyalty />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/my-bills"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <MyBills />
               </Layout>
             </PrivateRoute>
           }

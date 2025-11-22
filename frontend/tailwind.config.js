@@ -9,12 +9,24 @@ export default {
     extend: {
       colors: {
         primary: {
-          light: '#4B9EFF',
-          dark: '#7A5CFF',
+          light: '#14B8A6',  // Teal
+          dark: '#0D9488',   // Darker Teal
+        },
+        secondary: {
+          light: '#EC4899',  // Magenta
+          dark: '#DB2777',   // Darker Magenta
+        },
+        accent: {
+          light: '#F59E0B',  // Gold
+          dark: '#D97706',   // Darker Gold
         },
         background: {
-          light: '#F8F9FA',
-          dark: '#0B0F19',
+          light: '#FAFAFA',  // Soft white
+          dark: '#0F172A',   // Slate dark
+        },
+        surface: {
+          light: '#FFFFFF',  // Pure white
+          dark: '#1E293B',   // Lighter slate
         },
       },
       animation: {
@@ -32,8 +44,8 @@ export default {
           '100%': { transform: 'translateY(0)', opacity: '1' },
         },
         glow: {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(123, 92, 255, 0.5)' },
-          '50%': { boxShadow: '0 0 40px rgba(123, 92, 255, 0.8)' },
+          '0%, 100%': { boxShadow: '0 0 20px rgba(236, 72, 153, 0.5)' },
+          '50%': { boxShadow: '0 0 40px rgba(236, 72, 153, 0.8)' },
         },
       },
     },

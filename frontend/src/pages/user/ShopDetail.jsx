@@ -26,41 +26,45 @@ export default function ShopDetail() {
   const loadShopData = async () => {
     try {
       const response = await shopAPI.getById(id)
-      setShop(response.data.shop || mockShop)
-      setInventory(response.data.inventory || mockInventory)
+      setShop(response.data.shop)
+      setInventory(response.data.inventory || [])
     } catch (error) {
-      setShop(mockShop)
-      setInventory(mockInventory)
+      console.error('Error loading shop data:', error)
     } finally {
       setLoading(false)
     }
   }
 
-  const mockShop = {
-    name: 'Fresh Mart',
-    category: 'Grocery Store',
-    rating: 4.5,
-    reviews: 234,
-    distance: 0.8,
-    address: '123 Main Street, City',
-    phone: '+1 (555) 123-4567',
-    hours: 'Mon-Sun: 8:00 AM - 10:00 PM',
-    isOpen: true,
-  }
-
-  const mockInventory = [
-    { id: 1, name: 'Milk (1L)', price: 3.99, stock: 45, category: 'Dairy' },
-    { id: 2, name: 'Bread (White)', price: 2.49, stock: 12, category: 'Bakery' },
-    { id: 3, name: 'Eggs (12)', price: 4.99, stock: 8, category: 'Dairy' },
-    { id: 4, name: 'Tomatoes (1kg)', price: 5.99, stock: 23, category: 'Produce' },
-    { id: 5, name: 'Chicken Breast (1kg)', price: 12.99, stock: 15, category: 'Meat' },
-    { id: 6, name: 'Rice (5kg)', price: 15.99, stock: 30, category: 'Grains' },
-  ]
-
   if (loading) {
     return (
       <div className="flex justify-center py-20">
         <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
+      </div>
+    )
+  }
+
+  if (!shop) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20">
+        <h2 className={`text-2xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+          Shop Not Found
+        </h2>
+        <p className={isDark ? 'text-gray-400' : 'text-gray-600'}>
+          The shop you're looking for doesn't exist.
+        </p>
+      </div>
+    )
+  }
+
+  if (!shop) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20">
+        <h2 className={`text-2xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+          Shop Not Found
+        </h2>
+        <p className={isDark ? 'text-gray-400' : 'text-gray-600'}>
+          The shop you're looking for doesn't exist.
+        </p>
       </div>
     )
   }
@@ -99,25 +103,25 @@ export default function ShopDetail() {
               </div>
             </div>
 
-            <div className="flex items-center gap-4 mb-4">
-              <div className="flex items-center gap-1">
-                <StarIcon className="w-5 h-5 text-yellow-500 fill-yellow-500" />
-                <span className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                  {shop.rating}
-                </span>
-                <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                  ({shop.reviews} reviews)
-                </span>
-              </div>
-              <div className="flex items-center gap-1">
-                <MapPinIcon className={`w-5 h-5 ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
-                <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>
-                  {shop.distance} km away
-                </span>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="flex items-center gap-1">
+                  <StarIcon className="w-5 h-5 text-yellow-500 fill-yellow-500" />
+                  <span className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                    {shop.rating || 4.0}
+                  </span>
+                  <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                    ({shop.reviews || 0} reviews)
+                  </span>
+                </div>
+                {shop.location && (
+                  <div className="flex items-center gap-1">
+                    <MapPinIcon className={`w-5 h-5 ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
+                    <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>
+                      {shop.location}
+                    </span>
+                  </div>
+                )}
+              </div>              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div className="flex items-start gap-2">
                 <MapPinIcon className={`w-5 h-5 mt-0.5 ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
                 <div>
@@ -129,14 +133,25 @@ export default function ShopDetail() {
                 <PhoneIcon className={`w-5 h-5 mt-0.5 ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
                 <div>
                   <p className={`text-sm ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>Phone</p>
-                  <p className={isDark ? 'text-gray-300' : 'text-gray-700'}>{shop.phone}</p>
+                  <p className={isDark ? 'text-gray-300' : 'text-gray-700'}>{shop.phone || 'N/A'}</p>
                 </div>
               </div>
+              {shop.owner && (
+                <div className="flex items-start gap-2">
+                  <div className={`w-5 h-5 mt-0.5 flex items-center justify-center rounded-full ${isDark ? 'bg-gray-700' : 'bg-gray-300'}`}>
+                    <span className="text-xs">👤</span>
+                  </div>
+                  <div>
+                    <p className={`text-sm ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>Owner</p>
+                    <p className={isDark ? 'text-gray-300' : 'text-gray-700'}>{shop.owner}</p>
+                  </div>
+                </div>
+              )}
               <div className="flex items-start gap-2">
                 <ClockIcon className={`w-5 h-5 mt-0.5 ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
                 <div>
                   <p className={`text-sm ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>Hours</p>
-                  <p className={isDark ? 'text-gray-300' : 'text-gray-700'}>{shop.hours}</p>
+                  <p className={isDark ? 'text-gray-300' : 'text-gray-700'}>{shop.hours || 'Mon-Sun: 8:00 AM - 10:00 PM'}</p>
                 </div>
               </div>
             </div>
@@ -192,12 +207,12 @@ export default function ShopDetail() {
               </div>
               <div className="flex items-center justify-between">
                 <p className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                  ${item.price}
+                  ₹{item.price}
                 </p>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-3 py-1 rounded bg-blue-500 text-white text-sm font-medium"
+                  className="px-3 py-1 rounded bg-blue-500 text-white text-sm font-medium hover:bg-blue-600 transition-colors"
                 >
                   Add to Cart
                 </motion.button>

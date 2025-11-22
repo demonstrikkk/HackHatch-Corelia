@@ -1,13 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useThemeStore, useAuthStore } from '../../store'
 import { authAPI } from '../../services/api'
 import { notifications } from '@mantine/notifications'
 
 export default function Login() {
   const navigate = useNavigate()
-  const { theme } = useThemeStore()
+  const { theme, toggleTheme } = useThemeStore()
   const { login } = useAuthStore()
   const isDark = theme === 'dark'
 
@@ -16,6 +16,22 @@ export default function Login() {
     password: '',
   })
   const [loading, setLoading] = useState(false)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+  // Auto-scroll images every 4 seconds
+  const images = [
+    '/images-corelia/delivery-login.jpeg',
+    '/images-corelia/online-delivery-login.jpeg',
+    '/images-corelia/join-us-login.jpeg',
+  ]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % images.length)
+    }, 4000)
+
+    return () => clearInterval(interval)
+  }, [images.length])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -50,125 +66,236 @@ export default function Login() {
   }
 
   return (
-    <div className={`min-h-screen flex items-center justify-center px-4 ${
-      isDark ? 'bg-background-dark' : 'bg-background-light'
-    }`}>
-      {/* Background Effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 blur-3xl"></div>
+    <div
+      className="min-h-screen w-screen flex items-center justify-center relative"
+      style={{ backgroundColor: isDark ? '#0D0B14' : '#f0fdf4' }}
+    >
+      {/* Background Pattern */}
+      <div
+        className="absolute inset-0 bg-repeat opacity-5"
+        style={{ 
+          backgroundImage: isDark 
+            ? "url('/images-corelia/logo.png')" 
+            : "url('/images-corelia/logo.png')" 
+        }}
+      />
+
+      {/* Overlay */}
+      <div className={`absolute inset-0 ${isDark ? 'bg-black/20' : 'bg-black/5'} backdrop-blur-sm`} />
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative z-10 w-full max-w-md"
+        transition={{ duration: 0.8 }}
+        className="relative z-10 w-[95%] max-w-[1100px] flex shadow-2xl rounded-2xl overflow-hidden md:flex-row flex-col"
       >
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <Link to="/">
-            <h1 className={`text-4xl font-bold bg-gradient-to-r ${
-              isDark ? 'from-blue-400 to-purple-500' : 'from-blue-600 to-purple-600'
-            } bg-clip-text text-transparent`}>
-              CORELIA
+        {/* Left Side - Login Form */}
+        <div className={`flex-1 p-10 backdrop-blur-sm border-0 rounded-l-2xl md:rounded-r-none rounded-r-2xl ${
+          isDark ? 'bg-gray-900/95' : 'bg-white/95'
+        }`}>
+          <div className="text-center mb-8">
+            <h2 className={`text-lg mb-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+              Welcome back,
+            </h2>
+            <h1 className={`text-3xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>
+              Login to CORELIA
             </h1>
-          </Link>
-          <p className={`mt-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            Welcome back! Please login to your account.
-          </p>
-        </div>
+          </div>
 
-        {/* Login Form */}
-        <div className={`p-8 rounded-2xl ${
-          isDark ? 'bg-gray-900/50 border border-gray-800' : 'bg-white border border-gray-200'
-        } shadow-xl`}>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className={`block text-sm font-medium mb-2 ${
+              <label className={`text-sm font-medium mb-2 block ${
                 isDark ? 'text-gray-300' : 'text-gray-700'
               }`}>
-                Email Address
+                Email
               </label>
               <input
                 type="email"
-                required
+                name="email"
+                placeholder="Enter your email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className={`w-full px-4 py-3 rounded-lg ${
-                  isDark ? 'bg-gray-800 border-gray-700 text-white' : 'bg-gray-50 border-gray-300 text-gray-900'
-                } border focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                placeholder="you@example.com"
+                required
+                className={`w-full h-12 px-4 rounded-lg border transition-colors ${
+                  isDark 
+                    ? 'bg-gray-800 border-gray-700 text-white focus:border-blue-500 focus:ring-blue-500' 
+                    : 'bg-white border-gray-200 text-gray-900 focus:border-blue-500 focus:ring-blue-500'
+                } focus:outline-none focus:ring-2`}
               />
             </div>
 
             <div>
-              <label className={`block text-sm font-medium mb-2 ${
+              <label className={`text-sm font-medium mb-2 block ${
                 isDark ? 'text-gray-300' : 'text-gray-700'
               }`}>
                 Password
               </label>
               <input
                 type="password"
-                required
+                name="password"
+                placeholder="Enter your password"
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                className={`w-full px-4 py-3 rounded-lg ${
-                  isDark ? 'bg-gray-800 border-gray-700 text-white' : 'bg-gray-50 border-gray-300 text-gray-900'
-                } border focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                placeholder="••••••••"
+                required
+                className={`w-full h-12 px-4 rounded-lg border transition-colors ${
+                  isDark 
+                    ? 'bg-gray-800 border-gray-700 text-white focus:border-blue-500 focus:ring-blue-500' 
+                    : 'bg-white border-gray-200 text-gray-900 focus:border-blue-500 focus:ring-blue-500'
+                } focus:outline-none focus:ring-2`}
               />
             </div>
 
             <div className="flex items-center justify-between">
-              <label className="flex items-center">
-                <input type="checkbox" className="rounded text-blue-500" />
+              <label className="flex items-center cursor-pointer">
+                <input 
+                  type="checkbox" 
+                  className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" 
+                />
                 <span className={`ml-2 text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                   Remember me
                 </span>
               </label>
-              <a href="#" className="text-sm text-blue-500 hover:text-blue-600">
+              <a 
+                href="#" 
+                className={`text-sm font-semibold transition-colors ${
+                  isDark ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'
+                }`}
+              >
                 Forgot password?
               </a>
             </div>
 
             <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
               type="submit"
               disabled={loading}
-              className="w-full py-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold hover:shadow-lg transition-shadow disabled:opacity-50"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className={`w-full h-12 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold rounded-lg shadow-lg transition-all duration-200 ${
+                loading ? 'opacity-50 cursor-not-allowed' : ''
+              }`}
             >
-              {loading ? 'Logging in...' : 'Login'}
+              {loading ? 'Logging in...' : 'LOGIN'}
             </motion.button>
           </form>
 
-          <div className="mt-6 text-center">
+          <div className="mt-8 text-center">
             <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
               Don't have an account?{' '}
-              <Link to="/signup" className="text-blue-500 hover:text-blue-600 font-semibold">
-                Sign up
-              </Link>
+              <button
+                onClick={() => navigate('/signup')}
+                className={`font-semibold transition-colors ${
+                  isDark 
+                    ? 'text-blue-400 hover:text-blue-300 hover:underline' 
+                    : 'text-blue-600 hover:text-blue-700 hover:underline'
+                }`}
+              >
+                Register here
+              </button>
             </p>
           </div>
+
+          {/* Demo Credentials */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className={`mt-6 p-4 rounded-lg ${
+              isDark ? 'bg-blue-900/20 border border-blue-800' : 'bg-blue-50 border border-blue-200'
+            }`}
+          >
+            <p className={`text-sm font-semibold mb-2 ${
+              isDark ? 'text-blue-400' : 'text-blue-600'
+            }`}>
+              Demo Credentials:
+            </p>
+            <div className={`space-y-1 text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+              <p>👤 User: user@demo.com / password123</p>
+              <p>🏪 Seller: seller@demo.com / password123</p>
+            </div>
+          </motion.div>
         </div>
 
-        {/* Demo Credentials */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className={`mt-4 p-4 rounded-lg ${
-            isDark ? 'bg-blue-900/20 border border-blue-800' : 'bg-blue-50 border border-blue-200'
-          }`}
-        >
-          <p className={`text-sm ${isDark ? 'text-blue-400' : 'text-blue-600'} font-medium mb-2`}>
-            Demo Credentials:
-          </p>
-          <p className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            User: user@demo.com / password123
-          </p>
-          <p className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            Seller: seller@demo.com / password123
-          </p>
-        </motion.div>
+        {/* Right Side - Auto-scrolling Images */}
+        <div className="hidden md:block flex-1 relative bg-gradient-to-br from-blue-500 to-purple-600 min-h-[500px] rounded-r-2xl overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentImageIndex}
+              initial={{ opacity: 0, scale: 1.1 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.8 }}
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url('${images[currentImageIndex]}')` }}
+            />
+          </AnimatePresence>
+
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+          {/* Image Indicators */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentImageIndex(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentImageIndex 
+                    ? 'w-8 bg-white' 
+                    : 'bg-white/50 hover:bg-white/75'
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Optional Text Overlay */}
+          <div className="absolute bottom-20 left-8 right-8 z-10 text-white">
+            <motion.h3
+              key={`title-${currentImageIndex}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-2xl font-bold mb-2"
+            >
+              {currentImageIndex === 0 && 'Smart Shopping Experience'}
+              {currentImageIndex === 1 && 'AI-Powered Recommendations'}
+              {currentImageIndex === 2 && 'Analytics & Insights'}
+            </motion.h3>
+            <motion.p
+              key={`desc-${currentImageIndex}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="text-sm text-white/90"
+            >
+              {currentImageIndex === 0 && 'Discover the future of retail intelligence'}
+              {currentImageIndex === 1 && 'Personalized for every shopper'}
+              {currentImageIndex === 2 && 'Data-driven decisions for sellers'}
+            </motion.p>
+          </div>
+        </div>
       </motion.div>
+
+      {/* Logo in Top Left */}
+      <div className="absolute top-6 left-10 flex items-center gap-3 z-20">
+        <img src="/images-corelia/logo.png" alt="CORELIA" className="w-10 h-10 object-contain" />
+        <span className={`font-bold text-2xl bg-gradient-to-r ${
+          isDark ? 'from-blue-400 via-purple-400 to-pink-400' : 'from-blue-600 via-purple-600 to-pink-600'
+        } bg-clip-text text-transparent`}>
+          CORELIA
+        </span>
+      </div>
+
+      {/* Theme Toggle in Top Right */}
+      <button
+        onClick={toggleTheme}
+        className={`absolute top-6 right-10 z-20 p-3 rounded-full transition-all ${
+          isDark 
+            ? 'bg-gray-800 hover:bg-gray-700 text-yellow-400' 
+            : 'bg-white hover:bg-gray-100 text-gray-800 shadow-lg'
+        }`}
+      >
+        {isDark ? '☀️' : '🌙'}
+      </button>
     </div>
   )
 }

@@ -35,26 +35,56 @@ export default function OCRUpload() {
     }
 
     setUploading(true)
-    const formData = new FormData()
-    formData.append('file', file)
 
     try {
+      notifications.show({
+        title: 'Processing...',
+        message: 'Scanning image with OCR and AI...',
+        color: 'blue',
+      })
+
+      // Send to backend for OCR + LLM processing
+      const formData = new FormData()
+      formData.append('file', file)
+
       const response = await inventoryAPI.ocrScan(formData)
-      setExtractedData(response.data)
-      setEditableData(response.data.items || mockOCRData)
+      const extractedItems = response.data.items || []
+      const rawText = response.data.raw_text || ''
+      const confidence = response.data.ocr_confidence || 0
+
+      // Set the extracted data
+      setExtractedData({ 
+        success: true, 
+        total: extractedItems.length,
+        confidence: confidence,
+        rawText: rawText,
+        parsedBy: response.data.parsed_by || 'backend'
+      })
+      setEditableData(extractedItems)
+
       notifications.show({
         title: 'Success!',
-        message: 'Bill scanned successfully',
+        message: response.data.message || `Extracted ${extractedItems.length} items from bill`,
         color: 'green',
       })
+
+      console.log('OCR completed successfully:', {
+        itemCount: extractedItems.length,
+        confidence: confidence,
+        rawTextLength: rawText.length
+      })
+
     } catch (error) {
-      // Mock data for demo
-      setExtractedData({ success: true })
+      console.error('OCR Error:', error)
+      
+      // Fallback: Use mock data for demo
+      setExtractedData({ success: true, demo: true })
       setEditableData(mockOCRData)
+      
       notifications.show({
-        title: 'Demo Mode',
-        message: 'Using mock OCR data',
-        color: 'blue',
+        title: 'Processing Error',
+        message: 'Could not process image. Using demo data.',
+        color: 'red',
       })
     } finally {
       setUploading(false)
@@ -70,27 +100,39 @@ export default function OCRUpload() {
 
   const handleSaveToInventory = async () => {
     try {
+      const currentDate = new Date().toISOString()
+      let savedCount = 0
+      
+      console.log(`Saving ${editableData.length} items to inventory at ${currentDate}`)
+      
       for (const item of editableData) {
         await inventoryAPI.create({
           name: item.name,
           category: item.category,
-          price: item.price,
-          stock: item.quantity,
+          price: parseFloat(item.price),
+          stock: parseInt(item.quantity),
           unit: 'pcs',
+          // Backend will add current created_at and updated_at timestamps
         })
+        savedCount++
       }
+      
+      console.log(`Successfully saved ${savedCount} items`)
+      
       notifications.show({
         title: 'Success!',
-        message: 'Items added to inventory',
+        message: `${savedCount} items added to inventory on ${new Date().toLocaleDateString()}`,
         color: 'green',
       })
+      
       setFile(null)
       setExtractedData(null)
       setEditableData([])
     } catch (error) {
+      console.error('Save error:', error)
       notifications.show({
         title: 'Error',
-        message: 'Failed to save items',
+        message: error.response?.data?.detail || 'Failed to save items',
         color: 'red',
       })
     }
@@ -213,6 +255,20 @@ export default function OCRUpload() {
             <h2 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
               Extracted Items ({editableData.length})
             </h2>
+            {extractedData.confidence !== undefined && (
+              <span className={`ml-auto text-sm px-3 py-1 rounded-full ${
+                extractedData.confidence > 70 ? 'bg-green-100 text-green-800' :
+                extractedData.confidence > 40 ? 'bg-yellow-100 text-yellow-800' :
+                'bg-red-100 text-red-800'
+              }`}>
+                Confidence: {extractedData.confidence.toFixed(1)}%
+              </span>
+            )}
+            {extractedData.demoMode && (
+              <span className="ml-2 text-xs px-2 py-1 rounded bg-yellow-100 text-yellow-800">
+                Demo Mode
+              </span>
+            )}
           </div>
 
           <div className="overflow-x-auto mb-6">

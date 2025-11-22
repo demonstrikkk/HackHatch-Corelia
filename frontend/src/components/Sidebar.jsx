@@ -14,6 +14,7 @@ import {
   TruckIcon,
   Bars3Icon,
   XMarkIcon,
+  ReceiptPercentIcon,
 } from '@heroicons/react/24/outline'
 
 export default function Sidebar() {
@@ -28,6 +29,7 @@ export default function Sidebar() {
     { name: 'Shop Directory', path: '/shops', icon: BuildingStorefrontIcon },
     { name: 'Reviews', path: '/reviews', icon: ChatBubbleLeftRightIcon },
     { name: 'Loyalty', path: '/loyalty', icon: StarIcon },
+    { name: 'My Bills', path: '/my-bills', icon: ReceiptPercentIcon },
   ]
 
   const sellerLinks = [

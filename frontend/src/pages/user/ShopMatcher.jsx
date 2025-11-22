@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import { useThemeStore } from '../../store'
 import { shopAPI } from '../../services/api'
 import { notifications } from '@mantine/notifications'
@@ -15,6 +16,7 @@ import {
 export default function ShopMatcher() {
   const { theme } = useThemeStore()
   const isDark = theme === 'dark'
+  const navigate = useNavigate()
   
   const [groceryList, setGroceryList] = useState([])
   const [currentItem, setCurrentItem] = useState('')
@@ -213,23 +215,30 @@ export default function ShopMatcher() {
                     {shop.name}
                   </h3>
                   
+                  {shop.location && (
+                    <p className={`text-sm mb-3 flex items-center gap-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                      <MapPinIcon className="w-4 h-4" />
+                      {shop.location}
+                    </p>
+                  )}
+                  
                   <div className="grid grid-cols-2 gap-3 mb-3">
                     <div className="flex items-center gap-2">
                       <CurrencyDollarIcon className={`w-5 h-5 ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
                       <div>
                         <p className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>Total Cost</p>
                         <p className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                          ${shop.totalPrice}
+                          ₹{shop.totalPrice}
                         </p>
                       </div>
                     </div>
                     
                     <div className="flex items-center gap-2">
-                      <MapPinIcon className={`w-5 h-5 ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
+                      <CheckCircleIcon className={`w-5 h-5 ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
                       <div>
-                        <p className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>Distance</p>
+                        <p className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>Matched</p>
                         <p className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                          {shop.distance} km
+                          {shop.matchedItems}/{groceryList.length}
                         </p>
                       </div>
                     </div>
@@ -257,7 +266,8 @@ export default function ShopMatcher() {
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="px-4 py-2 rounded-lg bg-blue-500 text-white text-sm font-medium"
+                      onClick={() => navigate(`/shops/${shop.id}`)}
+                      className="px-4 py-2 rounded-lg bg-blue-500 text-white text-sm font-medium hover:bg-blue-600 transition-colors"
                     >
                       View Shop
                     </motion.button>

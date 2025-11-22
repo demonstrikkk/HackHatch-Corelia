@@ -25,11 +25,13 @@ export default function ShopDirectory() {
   const loadShops = async () => {
     try {
       const response = await shopAPI.getAll()
-      setShops(response.data.shops || mockShops)
-      setFilteredShops(response.data.shops || mockShops)
+      const shopsData = response.data.shops || []
+      setShops(shopsData)
+      setFilteredShops(shopsData)
     } catch (error) {
-      setShops(mockShops)
-      setFilteredShops(mockShops)
+      console.error('Error loading shops:', error)
+      setShops([])
+      setFilteredShops([])
     } finally {
       setLoading(false)
     }
@@ -41,27 +43,27 @@ export default function ShopDirectory() {
     if (searchQuery) {
       filtered = filtered.filter(shop =>
         shop.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        shop.category.toLowerCase().includes(searchQuery.toLowerCase())
+        shop.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (shop.location && shop.location.toLowerCase().includes(searchQuery.toLowerCase()))
       )
     }
 
     if (filter !== 'all') {
-      filtered = filtered.filter(shop => shop.category === filter)
+      filtered = filtered.filter(shop => shop.category.toLowerCase() === filter.toLowerCase())
     }
 
     setFilteredShops(filtered)
   }
 
-  const mockShops = [
-    { id: 1, name: 'Fresh Mart', category: 'Grocery', distance: 0.8, rating: 4.5, isOpen: true, image: 'shop1' },
-    { id: 2, name: 'Green Valley', category: 'Organic', distance: 1.2, rating: 4.7, isOpen: true, image: 'shop2' },
-    { id: 3, name: 'Quick Stop', category: 'Convenience', distance: 0.5, rating: 4.2, isOpen: false, image: 'shop3' },
-    { id: 4, name: 'Super Saver', category: 'Grocery', distance: 2.1, rating: 4.6, isOpen: true, image: 'shop4' },
-    { id: 5, name: 'Local Bazar', category: 'Market', distance: 1.5, rating: 4.4, isOpen: true, image: 'shop5' },
-    { id: 6, name: 'Healthy Choice', category: 'Organic', distance: 1.8, rating: 4.8, isOpen: true, image: 'shop6' },
-  ]
+  const [categories, setCategories] = useState(['all'])
 
-  const categories = ['all', 'Grocery', 'Organic', 'Convenience', 'Market']
+  useEffect(() => {
+    // Extract unique categories from shops
+    if (shops.length > 0) {
+      const uniqueCategories = ['all', ...new Set(shops.map(shop => shop.category))]
+      setCategories(uniqueCategories)
+    }
+  }, [shops])
 
   return (
     <div className="space-y-8">
@@ -152,15 +154,21 @@ export default function ShopDirectory() {
 
                 {/* Shop Info */}
                 <div className="flex items-start justify-between mb-3">
-                  <div>
-                    <h3 className={`text-lg font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  <div className="flex-1 min-w-0">
+                    <h3 className={`text-lg font-bold truncate ${isDark ? 'text-white' : 'text-gray-900'}`}>
                       {shop.name}
                     </h3>
                     <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                       {shop.category}
                     </p>
+                    {shop.location && (
+                      <p className={`text-xs flex items-center gap-1 mt-1 ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
+                        <MapPinIcon className="w-3 h-3" />
+                        {shop.location}
+                      </p>
+                    )}
                   </div>
-                  <div className={`flex items-center gap-1 px-2 py-1 rounded-full ${
+                  <div className={`flex items-center gap-1 px-2 py-1 rounded-full whitespace-nowrap ${
                     shop.isOpen ? 'bg-green-500/20 text-green-500' : 'bg-red-500/20 text-red-500'
                   }`}>
                     <ClockIcon className="w-4 h-4" />
@@ -173,15 +181,14 @@ export default function ShopDirectory() {
                   <div className="flex items-center gap-1">
                     <StarIcon className="w-4 h-4 text-yellow-500 fill-yellow-500" />
                     <span className={`text-sm font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                      {shop.rating}
+                      {shop.rating || 4.0}
                     </span>
                   </div>
-                  <div className="flex items-center gap-1">
-                    <MapPinIcon className={`w-4 h-4 ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
-                    <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                      {shop.distance} km
+                  {shop.phone && (
+                    <span className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                      📞 {shop.phone}
                     </span>
-                  </div>
+                  )}
                 </div>
               </Link>
             </motion.div>

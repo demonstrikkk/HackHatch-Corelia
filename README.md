@@ -68,12 +68,35 @@ pip install -r requirements.txt
 cp .env.example .env
 # Edit .env with your MongoDB connection string
 
+# Import shop data from CSV (IMPORTANT!)
+cd ..
+.\import_data.ps1
+# Or manually: cd backend; python import_shops_data.py
+
 # Run the server
+cd backend
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 The backend API will run on `http://localhost:8000`
 API documentation available at `http://localhost:8000/docs`
+
+### 📊 Shop Data Integration
+
+The project includes **real Delhi NCR shop data** with 150+ stores and 9,400+ inventory items from `delhi_ncr_stores_data.csv`.
+
+**Quick Import:**
+```powershell
+.\import_data.ps1
+```
+
+This imports:
+- 150+ unique shops across Delhi NCR
+- 9,400+ inventory items with prices and stock
+- Multiple store types: Jewelry, Electronics, Department Stores, Footwear, etc.
+- Locations: Sultanpur Majra, Sadar Bazar, Dilshad Garden, Paschim Vihar, etc.
+
+See [DATA_INTEGRATION.md](DATA_INTEGRATION.md) for detailed documentation.
 
 ## 🎨 Theme System
 
