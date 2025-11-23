@@ -19,10 +19,13 @@ async def connect_db():
         database = client[DATABASE_NAME]
         # Verify connection
         await client.admin.command('ping')
-        print(f"Connected to MongoDB: {DATABASE_NAME}")
+        print(f"✅ Connected to MongoDB: {DATABASE_NAME}")
     except Exception as e:
-        print(f"Failed to connect to MongoDB: {e}")
-        raise
+        print(f"⚠️  MongoDB not available: {e}")
+        print(f"⚠️  Running in demo mode without database")
+        # Set to None for demo mode
+        client = None
+        database = None
 
 async def close_db():
     global client
@@ -31,9 +34,5 @@ async def close_db():
         print("Disconnected from MongoDB")
 
 def get_database():
-    if database is None:
-        raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="Database connection not established"
-        )
+    # Return None if database not available (demo mode)
     return database

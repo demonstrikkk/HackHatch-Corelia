@@ -1,10 +1,16 @@
-import { useThemeStore } from '../store'
+import { useThemeStore, useAuthStore } from '../store'
 import Sidebar from './Sidebar'
 import Navbar from './Navbar'
+import Chatbot from './Chatbot'
+import LocationDetector from './LocationDetector'
 import { motion } from 'framer-motion'
 
 export default function Layout({ children }) {
   const { theme } = useThemeStore()
+  const { user } = useAuthStore()
+
+  // Show chatbot only for customer users
+  const showChatbot = user?.role === 'customer' || !user?.role
 
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-background-dark' : 'bg-background-light'}`}>
@@ -21,6 +27,10 @@ export default function Layout({ children }) {
           {children}
         </motion.main>
       </div>
+      {/* Chatbot - Only for customer users */}
+      {showChatbot && <Chatbot />}
+      {/* Location Detector - Only for customer users */}
+      {showChatbot && <LocationDetector />}
     </div>
   )
 }

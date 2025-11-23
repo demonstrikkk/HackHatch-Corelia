@@ -1,14 +1,18 @@
-import { useThemeStore, useAuthStore } from '../store'
-import { BellIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import { useThemeStore, useAuthStore, useLocationStore } from '../store'
+import { BellIcon, MagnifyingGlassIcon, MapPinIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
 import ThemeSwitcher from './ThemeSwitcher'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 
 export default function Navbar() {
   const { theme } = useThemeStore()
   const { user, logout } = useAuthStore()
+  const { city, setCity } = useLocationStore()
   const [showProfile, setShowProfile] = useState(false)
+  const [showLocationMenu, setShowLocationMenu] = useState(false)
   const isDark = theme === 'dark'
+
+  const availableCities = ['Delhi', 'Mumbai', 'Bangalore', 'Hyderabad', 'Chennai']
 
   return (
     <nav className={`sticky top-0 z-30 ${
@@ -35,6 +39,64 @@ export default function Navbar() {
 
         {/* Right Section */}
         <div className="flex items-center gap-3">
+          {/* Location Selector */}
+          {(user?.role === 'customer' || !user?.role) && (
+            <div className="relative">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setShowLocationMenu(!showLocationMenu)}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg ${
+                  isDark ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-100 hover:bg-gray-200'
+                } transition-colors`}
+              >
+                <MapPinIcon className={`w-5 h-5 ${city ? 'text-blue-500' : isDark ? 'text-gray-400' : 'text-gray-500'}`} />
+                <span className={`text-sm font-medium ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>
+                  {city || 'Set Location'}
+                </span>
+                <ChevronDownIcon className={`w-4 h-4 ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
+              </motion.button>
+
+              <AnimatePresence>
+                {showLocationMenu && (
+                  <>
+                    <div 
+                      className="fixed inset-0 z-40" 
+                      onClick={() => setShowLocationMenu(false)}
+                    />
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className={`absolute right-0 mt-2 w-48 rounded-lg shadow-xl border z-50 ${
+                        isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+                      }`}
+                    >
+                      <div className="p-2">
+                        {availableCities.map((cityName) => (
+                          <button
+                            key={cityName}
+                            onClick={() => {
+                              setCity(cityName)
+                              setShowLocationMenu(false)
+                            }}
+                            className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
+                              city === cityName
+                                ? isDark ? 'bg-blue-500/20 text-blue-400' : 'bg-blue-50 text-blue-600'
+                                : isDark ? 'hover:bg-gray-700 text-gray-200' : 'hover:bg-gray-100 text-gray-700'
+                            }`}
+                          >
+                            {cityName}
+                          </button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  </>
+                )}
+              </AnimatePresence>
+            </div>
+          )}
+
           {/* Theme Switcher */}
           <ThemeSwitcher />
 

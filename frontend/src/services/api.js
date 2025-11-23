@@ -62,7 +62,7 @@ export const shopAPI = {
   getAll: (params) => api.get('/shops', { params }),
   getById: (id) => api.get(`/shops/${id}`),
   search: (query) => api.get('/shops/search', { params: { q: query } }),
-  matchGroceryList: (items) => api.post('/shops/match', { items }),
+  matchGroceryList: (items, location) => api.post('/shops/match', { items, location }),
 }
 
 // Inventory APIs
@@ -86,6 +86,14 @@ export const analyticsAPI = {
   getSearchTrends: () => api.get('/analytics/search-trends'),
   getPredictions: () => api.get('/analytics/predictions'),
   getRevenue: (period) => api.get('/analytics/revenue', { params: { period } }),
+}
+
+// Chatbot APIs
+export const chatAPI = {
+  sendMessage: (data) => api.post('/chatbot/chat', data),
+  getHistory: (sessionId) => api.get('/chatbot/history', { params: { session_id: sessionId } }),
+  clearHistory: (sessionId) => api.delete(`/chatbot/history/${sessionId}`),
+  getStatus: () => api.get('/chatbot/status'),
 }
 
 export default api

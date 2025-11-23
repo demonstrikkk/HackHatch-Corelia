@@ -44,3 +44,40 @@ export const useLoyaltyStore = create((set) => ({
   redeemPoints: (points) => set((state) => ({ points: state.points - points })),
   setRewards: (rewards) => set({ rewards }),
 }))
+
+export const useChatStore = create(
+  persist(
+    (set) => ({
+      messages: [],
+      isOpen: false,
+      sessionId: null,
+      addMessage: (message) => set((state) => ({ messages: [...state.messages, message] })),
+      clearMessages: () => set({ messages: [] }),
+      toggleChat: () => set((state) => ({ isOpen: !state.isOpen })),
+      openChat: () => set({ isOpen: true }),
+      closeChat: () => set({ isOpen: false }),
+      setSessionId: (sessionId) => set({ sessionId }),
+    }),
+    {
+      name: 'corelia-chat',
+    }
+  )
+)
+
+export const useLocationStore = create(
+  persist(
+    (set) => ({
+      location: null,
+      city: null,
+      coordinates: null,
+      isDetecting: false,
+      setLocation: (location, city, coordinates) => set({ location, city, coordinates }),
+      setCity: (city) => set({ city }),
+      setDetecting: (isDetecting) => set({ isDetecting }),
+      clearLocation: () => set({ location: null, city: null, coordinates: null }),
+    }),
+    {
+      name: 'corelia-location',
+    }
+  )
+)
