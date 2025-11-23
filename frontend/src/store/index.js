@@ -30,20 +30,71 @@ export const useAuthStore = create(
   )
 )
 
-export const useCartStore = create((set) => ({
-  items: [],
-  addItem: (item) => set((state) => ({ items: [...state.items, item] })),
-  removeItem: (id) => set((state) => ({ items: state.items.filter((i) => i.id !== id) })),
-  clearCart: () => set({ items: [] }),
-}))
+export const useCartStore = create(
+  persist(
+    (set, get) => ({
+      items: [],
+      addItem: (item) => set((state) => {
+        // Check if item already exists in cart
+        const existingItem = state.items.find(i => i.id === item.id && i.shopId === item.shopId)
+        if (existingItem) {
+          // Update quantity
+          return {
+            items: state.items.map(i =>
+              i.id === item.id && i.shopId === item.shopId
+                ? { ...i, quantity: i.quantity + (item.quantity || 1) }
+                : i
+            )
+          }
+        }
+        // Add new item
+        return { items: [...state.items, { ...item, quantity: item.quantity || 1 }] }
+      }),
+      removeItem: (id, shopId) => set((state) => ({ 
+        items: state.items.filter((i) => !(i.id === id && i.shopId === shopId)) 
+      })),
+      updateQuantity: (id, shopId, quantity) => set((state) => ({
+        items: state.items.map(i =>
+          i.id === id && i.shopId === shopId
+            ? { ...i, quantity: Math.max(1, quantity) }
+            : i
+        )
+      })),
+      clearCart: () => set({ items: [] }),
+      getTotalItems: () => get().items.reduce((sum, item) => sum + item.quantity, 0),
+      getTotalPrice: () => get().items.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+    }),
+    {
+      name: 'corelia-cart',
+    }
+  )
+)
 
-export const useLoyaltyStore = create((set) => ({
-  points: 0,
-  rewards: [],
-  addPoints: (points) => set((state) => ({ points: state.points + points })),
-  redeemPoints: (points) => set((state) => ({ points: state.points - points })),
-  setRewards: (rewards) => set({ rewards }),
-}))
+export const useLoyaltyStore = create(
+  persist(
+    (set) => ({
+      points: 0,
+      tier: 'bronze',
+      rewards: [],
+      history: [],
+      setPoints: (points) => set({ points }),
+      addPoints: (points) => set((state) => ({ points: state.points + points })),
+      redeemPoints: (points) => set((state) => ({ points: Math.max(0, state.points - points) })),
+      setTier: (tier) => set({ tier }),
+      setRewards: (rewards) => set({ rewards }),
+      addHistory: (entry) => set((state) => ({ history: [entry, ...state.history] })),
+      setHistory: (history) => set({ history }),
+      updateFromAPI: (data) => set({ 
+        points: data.points || 0,
+        tier: data.tier || 'bronze',
+        rewards: data.rewards || [],
+      }),
+    }),
+    {
+      name: 'corelia-loyalty',
+    }
+  )
+)
 
 export const useChatStore = create(
   persist(

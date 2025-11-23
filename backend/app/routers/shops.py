@@ -197,6 +197,47 @@ async def match_grocery_list(request: ShopMatchRequest, db = Depends(get_databas
     
     return {"matches": matches, "totalShops": len(matches)}
 
+@router.get("/search/by-id/{shop_id}")
+async def search_shop_by_id(shop_id: str, db = Depends(get_database)):
+    """Search for a seller's shop by their unique shop ID"""
+    # Search in users collection for seller with this shop_id
+    seller = await db.users.find_one({"shop_id": shop_id, "role": "seller"})
+    
+    if not seller:
+        raise HTTPException(status_code=404, detail="Shop not found with this ID")
+    
+    # Get seller's inventory
+    items_cursor = db.inventory.find({"owner_email": seller["email"]})
+    items = await items_cursor.to_list(length=None)
+    
+    # Format inventory items
+    inventory = []
+    for item in items:
+        inventory.append({
+            "id": str(item["_id"]),
+            "name": item.get("name", ""),
+            "category": item.get("category", ""),
+            "price": item.get("price", 0),
+            "stock": item.get("stock", 0),
+            "unit": item.get("unit", "pcs")
+        })
+    
+    shop_info = {
+        "shop_id": seller.get("shop_id"),
+        "shop_name": seller.get("shop_name", "Unnamed Shop"),
+        "owner_name": seller.get("name", ""),
+        "owner_email": seller.get("email", ""),
+        "business_category": seller.get("business_category", "General Store"),
+        "business_address": seller.get("business_address", ""),
+        "phone": seller.get("phone", ""),
+        "total_sales": seller.get("total_sales", 0),
+        "rating": 4.5,
+        "isOpen": True,
+        "inventory": inventory
+    }
+    
+    return {"shop": shop_info}
+
 @router.get("/filters/locations")
 async def get_locations(db = Depends(get_database)):
     """Get all unique locations for filtering"""

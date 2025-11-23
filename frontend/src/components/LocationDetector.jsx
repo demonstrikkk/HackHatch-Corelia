@@ -102,13 +102,13 @@ export default function LocationDetector() {
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center gap-3">
                 <div className={`p-2 rounded-lg ${
-                  isDark ? 'bg-blue-500/20' : 'bg-blue-50'
+                  isDark ? 'bg-primary-dark/20' : 'bg-surface-light'
                 }`}>
-                  <MapPinIcon className="w-6 h-6 text-blue-500" />
+                  <MapPinIcon className="w-6 h-6 text-primary-dark" />
                 </div>
                 <div>
                   <h3 className={`font-semibold ${
-                    isDark ? 'text-white' : 'text-gray-900'
+                    isDark ? 'text-white' : 'text-primary-light'
                   }`}>
                     Enable Location
                   </h3>
@@ -137,8 +137,8 @@ export default function LocationDetector() {
                 disabled={isDetecting}
                 className={`w-full px-4 py-2 rounded-lg font-medium transition-colors ${
                   isDark
-                    ? 'bg-blue-500 hover:bg-blue-600 text-white disabled:bg-blue-500/50'
-                    : 'bg-blue-500 hover:bg-blue-600 text-white disabled:bg-blue-300'
+                    ? 'bg-primary-dark hover:bg-primary-dark text-white disabled:bg-primary-dark/50'
+                    : 'bg-primary-dark hover:bg-primary-dark text-white disabled:bg-primary-light'
                 }`}
               >
                 {isDetecting ? 'Detecting...' : 'Detect My Location'}

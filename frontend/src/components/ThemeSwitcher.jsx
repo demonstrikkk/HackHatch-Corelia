@@ -21,7 +21,7 @@ export default function ThemeSwitcher() {
         transition={{ duration: 0.3 }}
       >
         {isDark ? (
-          <MoonIcon className="w-6 h-6 text-purple-400" />
+          <MoonIcon className="w-6 h-6 text-primary-dark" />
         ) : (
           <SunIcon className="w-6 h-6 text-yellow-500" />
         )}

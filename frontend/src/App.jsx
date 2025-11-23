@@ -12,12 +12,15 @@ import Signup from './pages/public/Signup'
 
 // User Pages
 import Home from './pages/user/Home'
+import Profile from './pages/user/Profile'
 import ShopMatcher from './pages/user/ShopMatcher'
 import ShopDirectory from './pages/user/ShopDirectory'
 import ShopDetail from './pages/user/ShopDetail'
 import CommunityReviews from './pages/user/CommunityReviews'
 import Loyalty from './pages/user/Loyalty'
 import MyBills from './pages/user/MyBills'
+import ExpiringItems from './pages/user/ExpiringItems'
+import Cart from './pages/user/Cart'
 
 // Seller Pages
 import SellerDashboard from './pages/seller/SellerDashboard'
@@ -42,8 +45,14 @@ function App() {
     if (!isAuthenticated) {
       return <Navigate to="/login" replace />
     }
+    // Allow access if no specific role required, or if user has the required role
+    // No restriction - users can be both sellers and customers
     if (role && user?.role !== role) {
-      return <Navigate to="/" replace />
+      // If user is trying to access seller routes but is a customer, redirect to home
+      if (role === 'seller' && user?.role === 'customer') {
+        return <Navigate to="/home" replace />
+      }
+      // If somehow there's another role mismatch, allow it (sellers can use customer features)
     }
     return children
   }
@@ -63,6 +72,16 @@ function App() {
             <PrivateRoute>
               <Layout>
                 <Home />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <Profile />
               </Layout>
             </PrivateRoute>
           }
@@ -123,6 +142,26 @@ function App() {
             <PrivateRoute>
               <Layout>
                 <MyBills />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/expiring-items"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <ExpiringItems />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <Cart />
               </Layout>
             </PrivateRoute>
           }

@@ -50,7 +50,7 @@ export default function Landing() {
   ]
 
   return (
-    <div className={`min-h-screen ${isDark ? 'bg-gradient-to-b from-gray-900 via-gray-900 to-black text-white' : 'bg-gradient-to-b from-gray-50 via-white to-gray-100 text-gray-900'}`}>
+    <div className={`min-h-screen ${isDark ? 'bg-gradient-to-b from-gray-900 via-gray-900 to-black text-white' : 'bg-gradient-to-b from-gray-50 via-white to-gray-100 text-primary-light'}`}>
       {/* Navbar */}
       <nav className="sticky top-0 z-50 backdrop-blur-lg bg-opacity-80 border-b border-gray-200/10">
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -58,7 +58,7 @@ export default function Landing() {
             <div className="flex items-center gap-3">
               <img src="/images-corelia/logo.png" alt="CORELIA Logo" className="w-10 h-10 object-contain" />
               <h1 className={`text-2xl font-bold bg-gradient-to-r ${
-                isDark ? 'from-blue-400 to-purple-500' : 'from-blue-600 to-purple-600'
+                isDark ? 'from-purple-dark to-orange-dark' : 'from-purple-dark to-orange-dark'
               } bg-clip-text text-transparent`}>
                 CORELIA
               </h1>
@@ -75,14 +75,14 @@ export default function Landing() {
               <Link
                 to="/login"
                 className={`px-5 py-2 rounded-lg font-medium transition-all ${
-                  isDark ? 'text-gray-300 hover:text-white hover:bg-gray-800' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
+                  isDark ? 'text-gray-300 hover:text-white hover:bg-gray-800' : 'text-gray-700 hover:text-primary-light hover:bg-gray-100'
                 }`}
               >
                 Login
               </Link>
               <Link
                 to="/signup"
-                className="px-6 py-2.5 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2"
+                className="px-6 py-2.5 rounded-lg bg-primary-light text-gray-900 font-semibold hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2"
               >
                 Get Started
                 <ArrowRightIcon className="w-4 h-4" />
@@ -96,8 +96,8 @@ export default function Landing() {
       <section className="relative overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute inset-0">
-          <div className={`absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl opacity-20 ${isDark ? 'bg-blue-500' : 'bg-blue-300'}`}></div>
-          <div className={`absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl opacity-20 ${isDark ? 'bg-purple-500' : 'bg-purple-300'}`}></div>
+          <div className={`absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl opacity-20 ${isDark ? 'bg-primary-dark' : 'bg-primary-light'}`}></div>
+          <div className={`absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl opacity-20 ${isDark ? 'bg-primary-dark' : 'bg-primary-light'}`}></div>
         </div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-16 md:py-24">
@@ -108,18 +108,18 @@ export default function Landing() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7 }}
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 mb-6">
-                <SparklesIcon className="w-5 h-5 text-blue-500" />
-                <span className={`text-sm font-semibold ${isDark ? 'text-blue-400' : 'text-blue-600'}`}>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-light border border-primary-dark/20 mb-6">
+                <SparklesIcon className="w-5 h-5 text-primary-dark" />
+                <span className={`text-sm font-semibold ${isDark ? 'text-primary-dark' : 'text-primary-dark'}`}>
                   Next-Gen Retail Intelligence
                 </span>
               </div>
               
               <h2 className={`text-5xl md:text-6xl font-bold mb-6 leading-tight`}>
-                Shop Smarter,
+                Jo Dikhega,
                 <br />
-                <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                  Sell Better
+                <span className="bg-black bg-clip-text text-transparent">
+                  vo Bikega
                 </span>
               </h2>
               
@@ -136,7 +136,7 @@ export default function Landing() {
                     transition={{ delay: 0.3 + index * 0.1 }}
                     className="flex items-center gap-3"
                   >
-                    <CheckCircleIcon className="w-6 h-6 text-green-500 flex-shrink-0" />
+                    <CheckCircleIcon className="w-6 h-6 text-primary-light flex-shrink-0" />
                     <span className={isDark ? 'text-gray-300' : 'text-gray-700'}>{benefit}</span>
                   </motion.div>
                 ))}
@@ -145,15 +145,15 @@ export default function Landing() {
               <div className="flex gap-4 flex-wrap">
                 <Link
                   to="/signup"
-                  className="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white text-lg font-semibold hover:shadow-2xl hover:scale-105 transition-all flex items-center gap-2"
+                  className="px-8 py-4 rounded-xl bg-primary-light text-gray-900 text-lg font-semibold hover:shadow-2xl hover:scale-105 transition-all flex items-center gap-2"
                 >
                   Start Free Trial
                   <ArrowRightIcon className="w-5 h-5" />
                 </Link>
                 <button className={`px-8 py-4 rounded-xl border-2 transition-all ${
                   isDark 
-                    ? 'border-purple-500/50 text-purple-400 hover:bg-purple-500/10 hover:border-purple-400' 
-                    : 'border-purple-300 text-purple-600 hover:bg-purple-50 hover:border-purple-500'
+                    ? 'border-primary-dark/50 text-primary-dark hover:bg-primary-dark/10 hover:border-primary-dark' 
+                    : 'border-primary-light text-primary-dark hover:bg-surface-light hover:border-primary-dark'
                 } text-lg font-semibold`}>
                   Watch Demo
                 </button>
@@ -162,7 +162,7 @@ export default function Landing() {
               <div className="flex items-center gap-6 mt-10">
                 <div className="flex -space-x-3">
                   {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 border-2 border-white"></div>
+                    <div key={i} className="w-10 h-10 rounded-full bg-primary-light border-2 border-white"></div>
                   ))}
                 </div>
                 <div>
@@ -186,13 +186,19 @@ export default function Landing() {
               className="relative"
             >
               <div className="relative">
-                <img 
-                  src="/images-corelia/Gemini_Generated_Image_pto9z6pto9z6pto9.png" 
-                  alt="CORELIA Platform" 
+                <video
                   className="w-full rounded-2xl shadow-2xl"
-                />
-                <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl opacity-20 blur-2xl"></div>
-                <div className="absolute -top-6 -right-6 w-32 h-32 bg-gradient-to-br from-pink-500 to-orange-500 rounded-2xl opacity-20 blur-2xl"></div>
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  aria-label="CORELIA Platform demo"
+                >
+                  <source src="/images-corelia/corelia-mascot.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-primary-light rounded-2xl opacity-20 blur-2xl"></div>
+                <div className="absolute -top-6 -right-6 w-32 h-32 bg-gradient-to-br from-primary-dark to-primary-light rounded-2xl opacity-20 blur-2xl"></div>
               </div>
             </motion.div>
           </div>
@@ -209,7 +215,7 @@ export default function Landing() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h3 className={`text-4xl md:text-5xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+            <h3 className={`text-4xl md:text-5xl font-bold mb-4 ${isDark ? 'text-white' : 'text-primary-light'}`}>
               Powerful Features for Everyone
             </h3>
             <p className={`text-xl ${isDark ? 'text-gray-400' : 'text-gray-600'} max-w-2xl mx-auto`}>
@@ -228,12 +234,12 @@ export default function Landing() {
                 whileHover={{ y: -8, scale: 1.02 }}
                 className={`group relative overflow-hidden rounded-2xl p-8 transition-all duration-300 ${
                   isDark 
-                    ? 'bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 hover:border-purple-500/50' 
-                    : 'bg-white border border-gray-200 hover:border-purple-300'
+                    ? 'bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 hover:border-primary-dark/50' 
+                    : 'bg-white border border-gray-200 hover:border-primary-light'
                 } shadow-lg hover:shadow-2xl`}
               >
                 {/* Gradient Overlay on Hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-surface-light/5 to-primary-dark/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 
                 <div className="relative z-10">
                   <div className="mb-6 overflow-hidden rounded-xl">
@@ -244,7 +250,7 @@ export default function Landing() {
                     />
                   </div>
                   
-                  <h4 className={`text-2xl font-bold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  <h4 className={`text-2xl font-bold mb-3 ${isDark ? 'text-white' : 'text-primary-light'}`}>
                     {feature.title}
                   </h4>
                   
@@ -281,7 +287,7 @@ export default function Landing() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h3 className={`text-4xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <h3 className={`text-4xl font-bold mb-6 ${isDark ? 'text-white' : 'text-primary-light'}`}>
                 Data-Driven Insights for Sellers
               </h3>
               <p className={`text-lg mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
@@ -290,7 +296,7 @@ export default function Landing() {
               <ul className="space-y-4">
                 {['Real-time sales tracking', 'AI demand forecasting', 'Automated inventory alerts', 'Customer behavior insights'].map((item, i) => (
                   <li key={i} className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-lg bg-primary-light flex items-center justify-center">
                       <CheckCircleIcon className="w-5 h-5 text-white" />
                     </div>
                     <span className={isDark ? 'text-gray-300' : 'text-gray-700'}>{item}</span>
@@ -312,18 +318,18 @@ export default function Landing() {
             transition={{ duration: 0.6 }}
             className={`relative overflow-hidden rounded-3xl p-12 md:p-16 text-center ${
               isDark 
-                ? 'bg-gradient-to-br from-blue-900/50 via-purple-900/50 to-pink-900/50 border border-gray-700' 
-                : 'bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 border border-gray-200'
+                ? 'bg-gradient-to-br from-secondary-dark/50 via-secondary-dark/50 to-secondary-dark/50 border border-gray-700' 
+                : 'bg-surface-light border border-gray-200'
             } shadow-2xl`}
           >
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-10">
-              <div className="absolute top-0 left-0 w-40 h-40 bg-blue-500 rounded-full blur-3xl"></div>
-              <div className="absolute bottom-0 right-0 w-40 h-40 bg-purple-500 rounded-full blur-3xl"></div>
+              <div className="absolute top-0 left-0 w-40 h-40 bg-primary-dark rounded-full blur-3xl"></div>
+              <div className="absolute bottom-0 right-0 w-40 h-40 bg-primary-dark rounded-full blur-3xl"></div>
             </div>
             
             <div className="relative z-10">
-              <h3 className={`text-4xl md:text-5xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <h3 className={`text-4xl md:text-5xl font-bold mb-6 ${isDark ? 'text-white' : 'text-primary-light'}`}>
                 Ready to Transform Your Retail Experience?
               </h3>
               <p className={`text-xl mb-10 ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto`}>
@@ -331,7 +337,7 @@ export default function Landing() {
               </p>
               <Link
                 to="/signup"
-                className="inline-flex items-center gap-3 px-10 py-5 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white text-lg font-bold hover:shadow-2xl hover:scale-105 transition-all"
+                className="inline-flex items-center gap-3 px-10 py-5 rounded-xl bg-primary-light text-gray-900 text-lg font-bold hover:shadow-2xl hover:scale-105 transition-all"
               >
                 Get Started Free
                 <ArrowRightIcon className="w-6 h-6" />
@@ -347,15 +353,15 @@ export default function Landing() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-3">
               <img src="/images-corelia/logo.png" alt="CORELIA" className="w-8 h-8 object-contain" />
-              <span className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>CORELIA</span>
+              <span className={`text-xl font-bold ${isDark ? 'text-white' : 'text-primary-light'}`}>CORELIA</span>
             </div>
             <p className={`text-center ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
               © 2025 CORELIA. Empowering retail, one connection at a time.
             </p>
             <div className="flex gap-6">
-              <a href="#" className={`hover:text-blue-500 transition-colors ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Privacy</a>
-              <a href="#" className={`hover:text-blue-500 transition-colors ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Terms</a>
-              <a href="#" className={`hover:text-blue-500 transition-colors ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Support</a>
+              <a href="#" className={`hover:text-primary-dark transition-colors ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Privacy</a>
+              <a href="#" className={`hover:text-primary-dark transition-colors ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Terms</a>
+              <a href="#" className={`hover:text-primary-dark transition-colors ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Support</a>
             </div>
           </div>
         </div>

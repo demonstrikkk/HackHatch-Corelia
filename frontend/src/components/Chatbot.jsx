@@ -110,12 +110,12 @@ export default function Chatbot() {
             onClick={toggleChat}
             className={`fixed bottom-6 right-6 z-50 p-4 rounded-full shadow-2xl ${
               isDark 
-                ? 'bg-gradient-to-r from-blue-600 to-purple-600' 
-                : 'bg-gradient-to-r from-blue-500 to-purple-600'
-            } text-white hover:shadow-blue-500/50 transition-shadow`}
+                ? 'bg-primary-light' 
+                : 'bg-primary-light'
+            } text-white hover:shadow-primary-dark/50 transition-shadow`}
           >
             <ChatBubbleLeftRightIcon className="w-7 h-7" />
-            <span className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></span>
+            <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary-light rounded-full border-2 border-white"></span>
           </motion.button>
         )}
       </AnimatePresence>
@@ -133,7 +133,7 @@ export default function Chatbot() {
             }`}
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-4 flex items-center justify-between">
+            <div className="bg-primary-light p-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-white/20 rounded-lg backdrop-blur-sm">
                   <SparklesIcon className="w-5 h-5 text-white" />
@@ -161,7 +161,7 @@ export default function Chatbot() {
                     isDark ? 'text-gray-700' : 'text-gray-300'
                   }`} />
                   <h4 className={`text-lg font-semibold mb-2 ${
-                    isDark ? 'text-white' : 'text-gray-900'
+                    isDark ? 'text-white' : 'text-primary-light'
                   }`}>
                     Welcome to Shopping Assistant!
                   </h4>
@@ -190,10 +190,10 @@ export default function Chatbot() {
                   <div
                     className={`max-w-[80%] p-3 rounded-2xl ${
                       msg.role === 'user'
-                        ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white'
+                        ? 'bg-primary-light text-gray-900'
                         : isDark
                         ? 'bg-gray-800 text-gray-100'
-                        : 'bg-white text-gray-900 shadow-sm'
+                        : 'bg-white text-primary-light shadow-sm'
                     }`}
                   >
                     <p className="text-sm whitespace-pre-wrap break-words">{msg.content}</p>
@@ -221,9 +221,9 @@ export default function Chatbot() {
                     isDark ? 'bg-gray-800' : 'bg-white shadow-sm'
                   }`}>
                     <div className="flex gap-2">
-                      <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></span>
-                      <span className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></span>
-                      <span className="w-2 h-2 bg-pink-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></span>
+                      <span className="w-2 h-2 bg-primary-dark rounded-full animate-bounce"></span>
+                      <span className="w-2 h-2 bg-primary-dark rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></span>
+                      <span className="w-2 h-2 bg-primary-dark rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></span>
                     </div>
                   </div>
                 </motion.div>
@@ -242,7 +242,7 @@ export default function Chatbot() {
                   className={`text-xs mb-2 px-3 py-1 rounded-full ${
                     isDark 
                       ? 'text-gray-400 hover:text-gray-300 hover:bg-gray-800' 
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                      : 'text-gray-600 hover:text-primary-light hover:bg-gray-100'
                   } transition-colors`}
                 >
                   Clear Chat
@@ -259,15 +259,15 @@ export default function Chatbot() {
                   className={`flex-1 px-4 py-3 rounded-xl ${
                     isDark 
                       ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-500' 
-                      : 'bg-gray-100 border-gray-300 text-gray-900 placeholder-gray-400'
-                  } border focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50`}
+                      : 'bg-gray-100 border-gray-300 text-primary-light placeholder-gray-400'
+                  } border focus:outline-none focus:ring-2 focus:ring-primary-dark disabled:opacity-50`}
                 />
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={sendMessage}
                   disabled={!input.trim() || loading}
-                  className="p-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="p-3 rounded-xl bg-primary-light text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <PaperAirplaneIcon className="w-5 h-5" />
                 </motion.button>

@@ -72,7 +72,7 @@ export default function ShopMatcher() {
         animate={{ opacity: 1, y: 0 }}
       >
         <h1 className={`text-3xl md:text-4xl font-bold mb-2 ${
-          isDark ? 'text-white' : 'text-gray-900'
+          isDark ? 'text-white' : 'text-primary-light'
         }`}>
           Smart Shop Matcher 🎯
         </h1>
@@ -90,7 +90,7 @@ export default function ShopMatcher() {
             isDark ? 'bg-gray-900 border border-gray-800' : 'bg-white border border-gray-200'
           } shadow-lg`}
         >
-          <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+          <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-primary-light'}`}>
             Your Grocery List
           </h2>
 
@@ -103,14 +103,14 @@ export default function ShopMatcher() {
               onKeyPress={(e) => e.key === 'Enter' && addItem()}
               placeholder="Add item (e.g., Milk, Bread...)"
               className={`flex-1 px-4 py-3 rounded-lg ${
-                isDark ? 'bg-gray-800 border-gray-700 text-white' : 'bg-gray-50 border-gray-300 text-gray-900'
-              } border focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                isDark ? 'bg-gray-800 border-gray-700 text-white' : 'bg-gray-50 border-gray-300 text-primary-light'
+              } border focus:outline-none focus:ring-2 focus:ring-primary-dark`}
             />
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={addItem}
-              className="px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold"
+              className="px-6 py-3 rounded-lg bg-primary-light text-gray-900 font-semibold"
             >
               <PlusIcon className="w-5 h-5" />
             </motion.button>
@@ -130,12 +130,12 @@ export default function ShopMatcher() {
                     isDark ? 'bg-gray-800' : 'bg-gray-50'
                   }`}
                 >
-                  <span className={isDark ? 'text-white' : 'text-gray-900'}>
+                  <span className={isDark ? 'text-white' : 'text-primary-light'}>
                     {item.name}
                   </span>
                   <button
                     onClick={() => removeItem(item.id)}
-                    className="text-red-500 hover:text-red-600"
+                    className="text-secondary-light hover:text-secondary-light"
                   >
                     <XMarkIcon className="w-5 h-5" />
                   </button>
@@ -152,7 +152,7 @@ export default function ShopMatcher() {
               whileTap={{ scale: 0.98 }}
               onClick={findBestMatch}
               disabled={loading}
-              className="w-full py-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold hover:shadow-lg transition-shadow disabled:opacity-50"
+              className="w-full py-3 rounded-lg bg-primary-light text-gray-900 font-semibold hover:shadow-lg transition-shadow disabled:opacity-50"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
@@ -177,7 +177,7 @@ export default function ShopMatcher() {
             isDark ? 'bg-gray-900 border border-gray-800' : 'bg-white border border-gray-200'
           } shadow-lg`}
         >
-          <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+          <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-primary-light'}`}>
             Match Results
           </h2>
 
@@ -198,7 +198,7 @@ export default function ShopMatcher() {
                   transition={{ delay: index * 0.1 }}
                   className={`p-4 rounded-lg border-2 ${
                     index === 0
-                      ? 'border-green-500 bg-green-500/10'
+                      ? 'border-primary-light bg-primary-light/10'
                       : isDark
                       ? 'border-gray-800 bg-gray-800'
                       : 'border-gray-200 bg-gray-50'
@@ -206,12 +206,12 @@ export default function ShopMatcher() {
                 >
                   {index === 0 && (
                     <div className="flex items-center gap-2 mb-2">
-                      <CheckCircleIcon className="w-5 h-5 text-green-500" />
-                      <span className="text-sm font-semibold text-green-500">BEST MATCH</span>
+                      <CheckCircleIcon className="w-5 h-5 text-primary-light" />
+                      <span className="text-sm font-semibold text-primary-light">BEST MATCH</span>
                     </div>
                   )}
                   
-                  <h3 className={`text-lg font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  <h3 className={`text-lg font-bold mb-2 ${isDark ? 'text-white' : 'text-primary-light'}`}>
                     {shop.name}
                   </h3>
                   
@@ -227,7 +227,7 @@ export default function ShopMatcher() {
                       <CurrencyDollarIcon className={`w-5 h-5 ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
                       <div>
                         <p className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>Total Cost</p>
-                        <p className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                        <p className={`font-semibold ${isDark ? 'text-white' : 'text-primary-light'}`}>
                           ₹{shop.totalPrice}
                         </p>
                       </div>
@@ -237,7 +237,7 @@ export default function ShopMatcher() {
                       <CheckCircleIcon className={`w-5 h-5 ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
                       <div>
                         <p className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>Matched</p>
-                        <p className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                        <p className={`font-semibold ${isDark ? 'text-white' : 'text-primary-light'}`}>
                           {shop.matchedItems}/{groceryList.length}
                         </p>
                       </div>
@@ -248,10 +248,10 @@ export default function ShopMatcher() {
                     <div className="flex items-center gap-2">
                       <div className={`px-2 py-1 rounded text-xs font-medium ${
                         shop.availability >= 90
-                          ? 'bg-green-500/20 text-green-500'
+                          ? 'bg-primary-light/20 text-primary-light'
                           : shop.availability >= 70
                           ? 'bg-yellow-500/20 text-yellow-500'
-                          : 'bg-red-500/20 text-red-500'
+                          : 'bg-secondary-light/20 text-secondary-light'
                       }`}>
                         {shop.availability}% Available
                       </div>
@@ -267,7 +267,7 @@ export default function ShopMatcher() {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => navigate(`/shops/${shop.id}`)}
-                      className="px-4 py-2 rounded-lg bg-blue-500 text-white text-sm font-medium hover:bg-blue-600 transition-colors"
+                      className="px-4 py-2 rounded-lg bg-primary-dark text-white text-sm font-medium hover:bg-primary-dark transition-colors"
                     >
                       View Shop
                     </motion.button>

@@ -40,7 +40,7 @@ export default function Orders() {
         animate={{ opacity: 1, y: 0 }}
       >
         <h1 className={`text-3xl md:text-4xl font-bold mb-2 ${
-          isDark ? 'text-white' : 'text-gray-900'
+          isDark ? 'text-white' : 'text-primary-light'
         }`}>
           Orders Management 📦
         </h1>
@@ -61,7 +61,7 @@ export default function Orders() {
             onClick={() => setFilter(status)}
             className={`px-4 py-2 rounded-lg font-medium transition-all ${
               filter === status
-                ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white'
+                ? 'bg-primary-light text-gray-900'
                 : isDark
                 ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -91,7 +91,7 @@ export default function Orders() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
-                    <h3 className={`text-lg font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                    <h3 className={`text-lg font-bold ${isDark ? 'text-white' : 'text-primary-light'}`}>
                       Order #{order.id}
                     </h3>
                     <div className={`px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1 bg-${statusColor}-500/20 text-${statusColor}-500`}>
@@ -112,15 +112,15 @@ export default function Orders() {
                     <p className={`text-sm ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
                       Total
                     </p>
-                    <p className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                      ${order.total}
+                    <p className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-primary-light'}`}>
+                      ₹{order.total}
                     </p>
                   </div>
                   
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-4 py-2 rounded-lg bg-blue-500 text-white font-medium"
+                    className="px-4 py-2 rounded-lg bg-primary-dark text-white font-medium"
                   >
                     View Details
                   </motion.button>

@@ -37,7 +37,38 @@ export default function ShopDirectory() {
     }
   }
 
-  const filterShops = () => {
+  const filterShops = async () => {
+    // Check if search query looks like a shop ID (starts with SHP)
+    if (searchQuery.trim().toUpperCase().startsWith('SHP')) {
+      try {
+        setLoading(true)
+        const response = await shopAPI.searchById(searchQuery.trim())
+        const shop = response.data.shop
+        
+        // Convert to directory format
+        const formattedShop = {
+          id: shop.shop_id,
+          name: shop.shop_name,
+          category: shop.business_category,
+          location: shop.business_address || 'N/A',
+          distance: 0,
+          rating: shop.rating || 4.5,
+          isOpen: shop.isOpen !== false,
+          itemCount: shop.inventory?.length || 0
+        }
+        
+        setFilteredShops([formattedShop])
+        setLoading(false)
+        return
+      } catch (error) {
+        console.error('Shop ID search error:', error)
+        setFilteredShops([])
+        setLoading(false)
+        return
+      }
+    }
+    
+    // Normal search
     let filtered = shops
 
     if (searchQuery) {
@@ -73,7 +104,7 @@ export default function ShopDirectory() {
         animate={{ opacity: 1, y: 0 }}
       >
         <h1 className={`text-3xl md:text-4xl font-bold mb-2 ${
-          isDark ? 'text-white' : 'text-gray-900'
+          isDark ? 'text-white' : 'text-primary-light'
         }`}>
           Shop Directory 🏪
         </h1>
@@ -101,8 +132,8 @@ export default function ShopDirectory() {
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search shops..."
             className={`w-full pl-12 pr-4 py-3 rounded-lg ${
-              isDark ? 'bg-gray-800 border-gray-700 text-white' : 'bg-gray-50 border-gray-300 text-gray-900'
-            } border focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              isDark ? 'bg-gray-800 border-gray-700 text-white' : 'bg-gray-50 border-gray-300 text-primary-light'
+            } border focus:outline-none focus:ring-2 focus:ring-primary-dark`}
           />
         </div>
 
@@ -114,7 +145,7 @@ export default function ShopDirectory() {
               onClick={() => setFilter(category)}
               className={`px-4 py-2 rounded-lg font-medium transition-all ${
                 filter === category
-                  ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white'
+                  ? 'bg-primary-light text-gray-900'
                   : isDark
                   ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -129,7 +160,7 @@ export default function ShopDirectory() {
       {/* Shop Grid */}
       {loading ? (
         <div className="flex justify-center py-20">
-          <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary-dark border-t-transparent"></div>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -148,14 +179,14 @@ export default function ShopDirectory() {
                 } shadow-lg hover:shadow-2xl transition-all`}
               >
                 {/* Shop Image */}
-                <div className="w-full h-40 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg mb-4 flex items-center justify-center text-white text-2xl font-bold">
+                <div className="w-full h-40 bg-primary-light rounded-lg mb-4 flex items-center justify-center text-white text-2xl font-bold">
                   {shop.name.charAt(0)}
                 </div>
 
                 {/* Shop Info */}
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex-1 min-w-0">
-                    <h3 className={`text-lg font-bold truncate ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                    <h3 className={`text-lg font-bold truncate ${isDark ? 'text-white' : 'text-primary-light'}`}>
                       {shop.name}
                     </h3>
                     <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -169,7 +200,7 @@ export default function ShopDirectory() {
                     )}
                   </div>
                   <div className={`flex items-center gap-1 px-2 py-1 rounded-full whitespace-nowrap ${
-                    shop.isOpen ? 'bg-green-500/20 text-green-500' : 'bg-red-500/20 text-red-500'
+                    shop.isOpen ? 'bg-primary-light/20 text-primary-light' : 'bg-secondary-light/20 text-secondary-light'
                   }`}>
                     <ClockIcon className="w-4 h-4" />
                     <span className="text-xs font-medium">{shop.isOpen ? 'Open' : 'Closed'}</span>
@@ -180,7 +211,7 @@ export default function ShopDirectory() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1">
                     <StarIcon className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                    <span className={`text-sm font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                    <span className={`text-sm font-medium ${isDark ? 'text-white' : 'text-primary-light'}`}>
                       {shop.rating || 4.0}
                     </span>
                   </div>

@@ -41,53 +41,27 @@ export default function MyBills() {
   const loadBills = async () => {
     setLoading(true)
     try {
-      // Simulate API call with mock data
-      const mockBills = [
-        {
-          id: '1',
-          store: 'Fresh Mart',
-          date: '2024-01-15',
-          total: 1250,
-          items: [
-            { name: 'Milk', qty: 2, price: 60 },
-            { name: 'Bread', qty: 1, price: 40 },
-            { name: 'Eggs', qty: 1, price: 80 },
-            { name: 'Rice (5kg)', qty: 1, price: 450 },
-            { name: 'Vegetables', qty: 1, price: 620 },
-          ],
-          paymentMethod: 'UPI',
-          status: 'paid',
-        },
-        {
-          id: '2',
-          store: 'Quick Stop',
-          date: '2024-01-10',
-          total: 850,
-          items: [
-            { name: 'Biscuits', qty: 3, price: 150 },
-            { name: 'Snacks', qty: 2, price: 200 },
-            { name: 'Cold Drink', qty: 4, price: 500 },
-          ],
-          paymentMethod: 'Card',
-          status: 'paid',
-        },
-        {
-          id: '3',
-          store: 'Organic Valley',
-          date: '2024-01-05',
-          total: 2100,
-          items: [
-            { name: 'Organic Fruits', qty: 1, price: 800 },
-            { name: 'Honey', qty: 1, price: 350 },
-            { name: 'Green Tea', qty: 2, price: 400 },
-            { name: 'Nuts Mix', qty: 1, price: 550 },
-          ],
-          paymentMethod: 'Cash',
-          status: 'paid',
-        },
-      ]
-      setBills(mockBills)
+      // Fetch real bills from API
+      const response = await userAPI.getBills()
+      
+      // Transform API data to match component structure
+      const transformedBills = response.data.bills.map(bill => ({
+        id: bill.bill_id,
+        store: bill.shop_name,
+        date: new Date(bill.purchase_date).toISOString().split('T')[0],
+        total: bill.total_amount,
+        items: bill.items.map(item => ({
+          name: item.name,
+          qty: item.quantity,
+          price: item.price,
+        })),
+        paymentMethod: 'Online',
+        status: bill.status,
+      }))
+      
+      setBills(transformedBills)
     } catch (error) {
+      console.error('Failed to load bills:', error)
       notifications.show({
         title: 'Error',
         message: 'Failed to load bills',
@@ -243,7 +217,7 @@ export default function MyBills() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h1 className={`text-3xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+          <h1 className={`text-3xl font-bold ${isDark ? 'text-white' : 'text-primary-light'}`}>
             My Bills
           </h1>
           <p className={`mt-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -262,7 +236,7 @@ export default function MyBills() {
               src="/images-corelia/grocery.png"
             />
           </div>
-          <h4 className={`text-center text-sm ${isDark ? 'text-gray-300' : 'text-gray-700'} group-hover:text-blue-500 transition-colors`}>
+          <h4 className={`text-center text-sm ${isDark ? 'text-gray-300' : 'text-gray-700'} group-hover:text-primary-dark transition-colors`}>
             Got a Bill? 
             <p className="font-semibold">Scan now</p>
           </h4>
@@ -281,11 +255,11 @@ export default function MyBills() {
           <div className="flex items-center justify-between">
             <div>
               <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Total Bills</p>
-              <p className={`text-3xl font-bold mt-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <p className={`text-3xl font-bold mt-1 ${isDark ? 'text-white' : 'text-primary-light'}`}>
                 {filteredBills.length}
               </p>
             </div>
-            <DocumentTextIcon className="w-12 h-12 text-blue-500" />
+            <DocumentTextIcon className="w-12 h-12 text-primary-dark" />
           </div>
         </motion.div>
 
@@ -300,11 +274,11 @@ export default function MyBills() {
           <div className="flex items-center justify-between">
             <div>
               <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Total Spent</p>
-              <p className={`text-3xl font-bold mt-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <p className={`text-3xl font-bold mt-1 ${isDark ? 'text-white' : 'text-primary-light'}`}>
                 ₹{totalSpent}
               </p>
             </div>
-            <CalendarIcon className="w-12 h-12 text-green-500" />
+            <CalendarIcon className="w-12 h-12 text-primary-light" />
           </div>
         </motion.div>
 
@@ -319,11 +293,11 @@ export default function MyBills() {
           <div className="flex items-center justify-between">
             <div>
               <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Avg. Bill</p>
-              <p className={`text-3xl font-bold mt-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <p className={`text-3xl font-bold mt-1 ${isDark ? 'text-white' : 'text-primary-light'}`}>
                 ₹{filteredBills.length > 0 ? Math.round(totalSpent / filteredBills.length) : 0}
               </p>
             </div>
-            <CheckCircleIcon className="w-12 h-12 text-purple-500" />
+            <CheckCircleIcon className="w-12 h-12 text-primary-dark" />
           </div>
         </motion.div>
       </div>
@@ -346,8 +320,8 @@ export default function MyBills() {
               className={`w-full pl-10 pr-4 py-3 rounded-lg border ${
                 isDark
                   ? 'bg-gray-900 border-gray-700 text-white'
-                  : 'bg-gray-50 border-gray-300 text-gray-900'
-              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                  : 'bg-gray-50 border-gray-300 text-primary-light'
+              } focus:outline-none focus:ring-2 focus:ring-primary-dark`}
             />
           </div>
 
@@ -359,7 +333,7 @@ export default function MyBills() {
                 onClick={() => setFilterPeriod(period)}
                 className={`px-4 py-3 rounded-lg font-medium transition-all ${
                   filterPeriod === period
-                    ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg'
+                    ? 'bg-primary-light text-gray-900 shadow-lg'
                     : isDark
                     ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -372,7 +346,7 @@ export default function MyBills() {
 
           {/* Download Dropdown */}
           <div className="relative group">
-            <button className="flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold hover:shadow-lg transition-all">
+            <button className="flex items-center gap-2 px-6 py-3 rounded-lg bg-primary-light text-gray-900 font-semibold hover:shadow-lg transition-all">
               <ArrowDownTrayIcon className="w-5 h-5" />
               Download
             </button>
@@ -381,7 +355,7 @@ export default function MyBills() {
             }`}>
               <button
                 onClick={() => downloadBills('all')}
-                className={`w-full px-4 py-3 text-left hover:bg-blue-500 hover:text-white rounded-t-lg transition-colors ${
+                className={`w-full px-4 py-3 text-left hover:bg-primary-dark hover:text-white rounded-t-lg transition-colors ${
                   isDark ? 'text-gray-300' : 'text-gray-700'
                 }`}
               >
@@ -389,7 +363,7 @@ export default function MyBills() {
               </button>
               <button
                 onClick={() => downloadBills('month')}
-                className={`w-full px-4 py-3 text-left hover:bg-blue-500 hover:text-white transition-colors ${
+                className={`w-full px-4 py-3 text-left hover:bg-primary-dark hover:text-white transition-colors ${
                   isDark ? 'text-gray-300' : 'text-gray-700'
                 }`}
               >
@@ -397,7 +371,7 @@ export default function MyBills() {
               </button>
               <button
                 onClick={() => downloadBills('year')}
-                className={`w-full px-4 py-3 text-left hover:bg-blue-500 hover:text-white rounded-b-lg transition-colors ${
+                className={`w-full px-4 py-3 text-left hover:bg-primary-dark hover:text-white rounded-b-lg transition-colors ${
                   isDark ? 'text-gray-300' : 'text-gray-700'
                 }`}
               >
@@ -411,7 +385,7 @@ export default function MyBills() {
       {/* Bills Grid */}
       {loading ? (
         <div className="flex justify-center py-20">
-          <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-500 border-t-transparent"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary-dark border-t-transparent"></div>
         </div>
       ) : filteredBills.length > 0 ? (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -425,13 +399,13 @@ export default function MyBills() {
               onClick={() => setSelectedBill(bill)}
               className={`p-6 rounded-2xl cursor-pointer transition-all ${
                 isDark
-                  ? 'bg-gray-800/80 border border-gray-700 hover:border-blue-500'
+                  ? 'bg-gray-800/80 border border-gray-700 hover:border-primary-dark'
                   : 'bg-white border border-gray-200 hover:border-blue-400'
               } shadow-lg hover:shadow-2xl`}
             >
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <h3 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  <h3 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-primary-light'}`}>
                     {bill.store}
                   </h3>
                   <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -442,7 +416,7 @@ export default function MyBills() {
                     })}
                   </p>
                 </div>
-                <DocumentTextIcon className="w-8 h-8 text-blue-500" />
+                <DocumentTextIcon className="w-8 h-8 text-primary-dark" />
               </div>
 
               <div className="space-y-2">
@@ -450,7 +424,7 @@ export default function MyBills() {
                   <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                     Total Amount
                   </span>
-                  <span className={`text-2xl font-bold ${isDark ? 'text-green-400' : 'text-green-600'}`}>
+                  <span className={`text-2xl font-bold ${isDark ? 'text-primary-light' : 'text-secondary-light'}`}>
                     ₹{bill.total}
                   </span>
                 </div>
@@ -469,7 +443,7 @@ export default function MyBills() {
                     Payment
                   </span>
                   <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                    isDark ? 'bg-purple-900/50 text-purple-400' : 'bg-purple-100 text-purple-700'
+                    isDark ? 'bg-secondary-dark/50 text-primary-dark' : 'bg-surface-light text-secondary-dark'
                   }`}>
                     {bill.paymentMethod}
                   </span>
@@ -504,7 +478,7 @@ export default function MyBills() {
               <div className="p-8">
                 <div className="flex items-start justify-between mb-6">
                   <div>
-                    <h3 className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                    <h3 className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-primary-light'}`}>
                       {selectedBill.store}
                     </h3>
                     <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -529,7 +503,7 @@ export default function MyBills() {
                   <div className={`p-4 rounded-lg ${
                     isDark ? 'bg-gray-900' : 'bg-gray-50'
                   }`}>
-                    <h4 className={`font-semibold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                    <h4 className={`font-semibold mb-3 ${isDark ? 'text-white' : 'text-primary-light'}`}>
                       Items Purchased
                     </h4>
                     <ul className="space-y-2">
@@ -542,7 +516,7 @@ export default function MyBills() {
                             <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                               Qty: {item.qty}
                             </span>
-                            <span className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                            <span className={`font-semibold ${isDark ? 'text-white' : 'text-primary-light'}`}>
                               ₹{item.price}
                             </span>
                           </div>
@@ -552,13 +526,13 @@ export default function MyBills() {
                   </div>
 
                   <div className={`p-4 rounded-lg border-2 ${
-                    isDark ? 'border-green-800 bg-green-900/20' : 'border-green-200 bg-green-50'
+                    isDark ? 'border-secondary-light bg-secondary-light/20' : 'border-primary-light bg-surface-light'
                   }`}>
                     <div className="flex justify-between items-center">
-                      <span className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                      <span className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-primary-light'}`}>
                         Total Amount
                       </span>
-                      <span className={`text-3xl font-bold ${isDark ? 'text-green-400' : 'text-green-600'}`}>
+                      <span className={`text-3xl font-bold ${isDark ? 'text-primary-light' : 'text-secondary-light'}`}>
                         ₹{selectedBill.total}
                       </span>
                     </div>
@@ -574,7 +548,7 @@ export default function MyBills() {
 
                   <button
                     onClick={() => setSelectedBill(null)}
-                    className="w-full py-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold hover:shadow-lg transition-all"
+                    className="w-full py-3 rounded-lg bg-primary-light text-gray-900 font-semibold hover:shadow-lg transition-all"
                   >
                     Close
                   </button>
@@ -600,7 +574,7 @@ export default function MyBills() {
               <div className="p-8">
                 <div className="flex items-start justify-between mb-6">
                   <div>
-                    <h3 className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                    <h3 className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-primary-light'}`}>
                       Upload Bill with OCR
                     </h3>
                     <p className={`text-sm mt-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -622,7 +596,7 @@ export default function MyBills() {
 
                 {!uploadPreview ? (
                   <div className={`border-2 border-dashed rounded-2xl p-12 text-center ${
-                    isDark ? 'border-gray-700 hover:border-blue-500' : 'border-gray-300 hover:border-blue-400'
+                    isDark ? 'border-gray-700 hover:border-primary-dark' : 'border-gray-300 hover:border-blue-400'
                   } transition-colors cursor-pointer`}>
                     <input
                       type="file"
@@ -635,7 +609,7 @@ export default function MyBills() {
                       <CameraIcon className={`w-16 h-16 mx-auto mb-4 ${
                         isDark ? 'text-gray-600' : 'text-gray-400'
                       }`} />
-                      <p className={`text-lg font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                      <p className={`text-lg font-semibold mb-2 ${isDark ? 'text-white' : 'text-primary-light'}`}>
                         Click to upload bill image
                       </p>
                       <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -648,7 +622,7 @@ export default function MyBills() {
                     <div className="grid md:grid-cols-2 gap-6">
                       {/* Preview */}
                       <div>
-                        <h4 className={`font-semibold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                        <h4 className={`font-semibold mb-3 ${isDark ? 'text-white' : 'text-primary-light'}`}>
                           Bill Preview
                         </h4>
                         <img
@@ -660,12 +634,12 @@ export default function MyBills() {
 
                       {/* OCR Result */}
                       <div>
-                        <h4 className={`font-semibold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                        <h4 className={`font-semibold mb-3 ${isDark ? 'text-white' : 'text-primary-light'}`}>
                           Extracted Data
                         </h4>
                         {ocrLoading ? (
                           <div className="flex flex-col items-center justify-center py-12">
-                            <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent mb-4"></div>
+                            <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary-dark border-t-transparent mb-4"></div>
                             <p className={isDark ? 'text-gray-400' : 'text-gray-600'}>
                               Scanning bill...
                             </p>
@@ -684,7 +658,7 @@ export default function MyBills() {
                                   className={`w-full mt-1 px-3 py-2 rounded-lg border ${
                                     isDark
                                       ? 'bg-gray-800 border-gray-700 text-white'
-                                      : 'bg-white border-gray-300 text-gray-900'
+                                      : 'bg-white border-gray-300 text-primary-light'
                                   }`}
                                 />
                               </div>
@@ -699,14 +673,14 @@ export default function MyBills() {
                                   className={`w-full mt-1 px-3 py-2 rounded-lg border ${
                                     isDark
                                       ? 'bg-gray-800 border-gray-700 text-white'
-                                      : 'bg-white border-gray-300 text-gray-900'
+                                      : 'bg-white border-gray-300 text-primary-light'
                                   }`}
                                 />
                               </div>
                             </div>
 
                             <div className="mb-4">
-                              <h5 className={`text-sm font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                              <h5 className={`text-sm font-semibold mb-2 ${isDark ? 'text-white' : 'text-primary-light'}`}>
                                 Items
                               </h5>
                               <ul className="space-y-2">
@@ -715,7 +689,7 @@ export default function MyBills() {
                                     <span className={isDark ? 'text-gray-300' : 'text-gray-700'}>
                                       {item.name} x{item.qty}
                                     </span>
-                                    <span className={isDark ? 'text-white' : 'text-gray-900'}>
+                                    <span className={isDark ? 'text-white' : 'text-primary-light'}>
                                       ₹{item.price}
                                     </span>
                                   </li>
@@ -725,10 +699,10 @@ export default function MyBills() {
 
                             <div className={`pt-3 border-t ${isDark ? 'border-gray-700' : 'border-gray-300'}`}>
                               <div className="flex justify-between items-center">
-                                <span className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                                <span className={`font-semibold ${isDark ? 'text-white' : 'text-primary-light'}`}>
                                   Total
                                 </span>
-                                <span className={`text-xl font-bold ${isDark ? 'text-green-400' : 'text-green-600'}`}>
+                                <span className={`text-xl font-bold ${isDark ? 'text-primary-light' : 'text-secondary-light'}`}>
                                   ₹{ocrResult.total}
                                 </span>
                               </div>
@@ -749,14 +723,14 @@ export default function MyBills() {
                         <button
                           onClick={handleOCRScan}
                           disabled={ocrLoading}
-                          className="flex-1 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold hover:shadow-lg transition-all disabled:opacity-50"
+                          className="flex-1 py-3 rounded-lg bg-primary-light text-gray-900 font-semibold hover:shadow-lg transition-all disabled:opacity-50"
                         >
                           {ocrLoading ? 'Scanning...' : 'Scan Bill'}
                         </button>
                       ) : (
                         <button
                           onClick={saveBill}
-                          className="flex-1 py-3 rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold hover:shadow-lg transition-all"
+                          className="flex-1 py-3 rounded-lg bg-primary-light text-gray-900 font-semibold hover:shadow-lg transition-all"
                         >
                           Save Bill
                         </button>

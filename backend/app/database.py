@@ -20,12 +20,41 @@ async def connect_db():
         # Verify connection
         await client.admin.command('ping')
         print(f"✅ Connected to MongoDB: {DATABASE_NAME}")
+        
+        # Create indexes for better performance
+        await setup_indexes()
+        
     except Exception as e:
         print(f"⚠️  MongoDB not available: {e}")
         print(f"⚠️  Running in demo mode without database")
         # Set to None for demo mode
         client = None
         database = None
+
+async def setup_indexes():
+    """Create database indexes for optimal performance"""
+    global database
+    if database is None:
+        return
+    
+    try:
+        # Inventory collection indexes
+        await database.inventory.create_index("owner_email")
+        await database.inventory.create_index([("owner_email", 1), ("category", 1)])
+        await database.inventory.create_index([("owner_email", 1), ("name", 1)])
+        
+        # Review collection indexes
+        await database.reviews.create_index("shop_id")
+        await database.reviews.create_index([("shop_id", 1), ("created_at", -1)])
+        await database.reviews.create_index("user_email")
+        await database.reviews.create_index("created_at")
+        
+        # Review likes indexes
+        await database.review_likes.create_index([("review_id", 1), ("user_email", 1)], unique=True)
+        
+        print("✅ Database indexes created successfully")
+    except Exception as e:
+        print(f"⚠️  Index creation warning: {e}")
 
 async def close_db():
     global client

@@ -53,7 +53,7 @@ export default function AnalyticsDashboard() {
       >
         <div>
           <h1 className={`text-3xl md:text-4xl font-bold mb-2 ${
-            isDark ? 'text-white' : 'text-gray-900'
+            isDark ? 'text-white' : 'text-primary-light'
           }`}>
             Analytics Dashboard 📈
           </h1>
@@ -65,8 +65,8 @@ export default function AnalyticsDashboard() {
           value={period}
           onChange={(e) => setPeriod(e.target.value)}
           className={`px-4 py-2 rounded-lg ${
-            isDark ? 'bg-gray-900 border-gray-800 text-white' : 'bg-white border-gray-300 text-gray-900'
-          } border focus:outline-none focus:ring-2 focus:ring-blue-500`}
+            isDark ? 'bg-gray-900 border-gray-800 text-white' : 'bg-white border-gray-300 text-primary-light'
+          } border focus:outline-none focus:ring-2 focus:ring-primary-dark`}
         >
           <option value="week">This Week</option>
           <option value="month">This Month</option>
@@ -82,7 +82,7 @@ export default function AnalyticsDashboard() {
           isDark ? 'bg-gray-900 border border-gray-800' : 'bg-white border border-gray-200'
         } shadow-lg`}
       >
-        <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+        <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-primary-light'}`}>
           Revenue & Profit Trends
         </h2>
         <ResponsiveContainer width="100%" height={300}>
@@ -98,8 +98,8 @@ export default function AnalyticsDashboard() {
               }}
             />
             <Legend />
-            <Line type="monotone" dataKey="revenue" stroke="#3b82f6" strokeWidth={3} name="Revenue ($)" />
-            <Line type="monotone" dataKey="profit" stroke="#10b981" strokeWidth={3} name="Profit ($)" />
+            <Line type="monotone" dataKey="revenue" stroke="#3b82f6" strokeWidth={3} name="Revenue (₹)" />
+            <Line type="monotone" dataKey="profit" stroke="#10b981" strokeWidth={3} name="Profit (₹)" />
           </LineChart>
         </ResponsiveContainer>
       </motion.div>
@@ -113,7 +113,7 @@ export default function AnalyticsDashboard() {
             isDark ? 'bg-gray-900 border border-gray-800' : 'bg-white border border-gray-200'
           } shadow-lg`}
         >
-          <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+          <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-primary-light'}`}>
             Sales by Category
           </h2>
           <ResponsiveContainer width="100%" height={250}>
@@ -145,7 +145,7 @@ export default function AnalyticsDashboard() {
             isDark ? 'bg-gray-900 border border-gray-800' : 'bg-white border border-gray-200'
           } shadow-lg`}
         >
-          <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+          <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-primary-light'}`}>
             Top Search Keywords
           </h2>
           <ResponsiveContainer width="100%" height={250}>
@@ -175,7 +175,7 @@ export default function AnalyticsDashboard() {
           isDark ? 'bg-gray-900 border border-gray-800' : 'bg-white border border-gray-200'
         } shadow-lg`}
       >
-        <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+        <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-primary-light'}`}>
           AI-Powered Demand Predictions
         </h2>
         <div className="space-y-4">
@@ -191,7 +191,7 @@ export default function AnalyticsDashboard() {
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <h4 className={`font-semibold mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  <h4 className={`font-semibold mb-1 ${isDark ? 'text-white' : 'text-primary-light'}`}>
                     {pred.item}
                   </h4>
                   <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -200,7 +200,7 @@ export default function AnalyticsDashboard() {
                 </div>
                 <div className="text-right">
                   <div className={`flex items-center gap-2 mb-1 ${
-                    pred.trend === 'up' ? 'text-green-500' : 'text-red-500'
+                    pred.trend === 'up' ? 'text-primary-light' : 'text-secondary-light'
                   }`}>
                     {/* {pred.trend === 'up' ? (
                       <TrendingUpIcon className="w-5 h-5" />
@@ -218,7 +218,7 @@ export default function AnalyticsDashboard() {
                 <div className="w-full bg-gray-700 rounded-full h-2">
                   <div
                     className={`h-2 rounded-full ${
-                      pred.trend === 'up' ? 'bg-green-500' : 'bg-red-500'
+                      pred.trend === 'up' ? 'bg-primary-light' : 'bg-secondary-light'
                     }`}
                     style={{ width: `${(pred.predicted / (pred.current + pred.predicted)) * 100}%` }}
                   ></div>

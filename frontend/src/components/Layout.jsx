@@ -3,6 +3,7 @@ import Sidebar from './Sidebar'
 import Navbar from './Navbar'
 import Chatbot from './Chatbot'
 import LocationDetector from './LocationDetector'
+import ExpiringItemsAlert from './ExpiringItemsAlert'
 import { motion } from 'framer-motion'
 
 export default function Layout({ children }) {
@@ -11,6 +12,8 @@ export default function Layout({ children }) {
 
   // Show chatbot only for customer users
   const showChatbot = user?.role === 'customer' || !user?.role
+  // Show expiring items alert only for seller users
+  const showExpiringAlert = user?.role === 'seller'
 
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-background-dark' : 'bg-background-light'}`}>
@@ -31,6 +34,8 @@ export default function Layout({ children }) {
       {showChatbot && <Chatbot />}
       {/* Location Detector - Only for customer users */}
       {showChatbot && <LocationDetector />}
+      {/* Expiring Items Alert - Only for seller users */}
+      {showExpiringAlert && <ExpiringItemsAlert />}
     </div>
   )
 }

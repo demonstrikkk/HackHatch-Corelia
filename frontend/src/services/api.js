@@ -55,6 +55,8 @@ export const userAPI = {
   getLoyalty: () => api.get('/user/loyalty'),
   getReviews: () => api.get('/user/reviews'),
   addReview: (review) => api.post('/user/reviews', review),
+  getBills: () => api.get('/user/bills'),
+  createBill: (billData) => api.post('/user/bills', billData),
 }
 
 // Shop APIs
@@ -62,6 +64,7 @@ export const shopAPI = {
   getAll: (params) => api.get('/shops', { params }),
   getById: (id) => api.get(`/shops/${id}`),
   search: (query) => api.get('/shops/search', { params: { q: query } }),
+  searchById: (shopId) => api.get(`/shops/search/by-id/${shopId}`),
   matchGroceryList: (items, location) => api.post('/shops/match', { items, location }),
 }
 
@@ -74,13 +77,18 @@ export const inventoryAPI = {
     headers: { 'Content-Type': 'multipart/form-data' },
   }),
   getAll: () => api.get('/inventory'),
+  getExpiring: () => api.get('/inventory/expiring'),
   create: (item) => api.post('/inventory', item),
   update: (id, item) => api.put(`/inventory/${id}`, item),
   delete: (id) => api.delete(`/inventory/${id}`),
+  getExpiryInfo: (category) => api.get(`/inventory/expiry-info/${category}`),
+  getAllExpiryCategories: () => api.get('/inventory/expiry-categories'),
+  deductStock: (items) => api.post('/inventory/deduct-stock', items),
 }
 
 // Analytics APIs
 export const analyticsAPI = {
+  getSellerStats: () => api.get('/analytics/seller-stats'),
   getTopSelling: () => api.get('/analytics/top-selling'),
   getLowStock: () => api.get('/analytics/low-stock'),
   getSearchTrends: () => api.get('/analytics/search-trends'),
@@ -94,6 +102,16 @@ export const chatAPI = {
   getHistory: (sessionId) => api.get('/chatbot/history', { params: { session_id: sessionId } }),
   clearHistory: (sessionId) => api.delete(`/chatbot/history/${sessionId}`),
   getStatus: () => api.get('/chatbot/status'),
+}
+
+// Review APIs
+export const reviewAPI = {
+  getAll: (limit = 20) => api.get('/reviews/all', { params: { limit } }),
+  getShopReviews: (shopId, limit = 50) => api.get(`/reviews/shop/${shopId}`, { params: { limit } }),
+  create: (review) => api.post('/reviews', review),
+  likeReview: (reviewId) => api.put(`/reviews/${reviewId}/like`),
+  deleteReview: (reviewId) => api.delete(`/reviews/${reviewId}`),
+  getStats: () => api.get('/reviews/stats'),
 }
 
 export default api

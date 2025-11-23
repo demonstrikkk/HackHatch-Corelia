@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import auth, user, shops, inventory, analytics, chatbot
+from app.routers import auth, user, shops, inventory, analytics, chatbot, reviews
 from app.database import connect_db, close_db
 import logging
 
@@ -46,6 +46,7 @@ app.include_router(shops.router, prefix="/api/shops", tags=["Shops"])
 app.include_router(inventory.router, prefix="/api/inventory", tags=["Inventory"])
 app.include_router(analytics.router, prefix="/api/analytics", tags=["Analytics"])
 app.include_router(chatbot.router, prefix="/api/chatbot", tags=["Chatbot"])
+app.include_router(reviews.router, prefix="/api/reviews", tags=["Reviews"])
 
 @app.get("/")
 async def root():

@@ -1,0 +1,396 @@
+INFO:     Will watch for changes in these directories: ['/Users/riishabhjain/Desktop/HACK_HATCH_FS/HackHatch-Corelia/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [86987] using WatchFiles
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pydantic/_internal/_fields.py:132: UserWarning: Field "model_version" in LlmResponse has conflict with protected namespace "model_".
+
+You may be able to resolve this warning by setting `model_config['protected_namespaces'] = ()`.
+  warnings.warn(
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pydantic/_internal/_fields.py:132: UserWarning: Field "model_version" in Event has conflict with protected namespace "model_".
+
+You may be able to resolve this warning by setting `model_config['protected_namespaces'] = ()`.
+  warnings.warn(
+INFO:     Started server process [87062]
+INFO:     Waiting for application startup.
+2025-11-23 09:14:49,433 - app.main - INFO - Starting CORELIA API...
+2025-11-23 09:14:49,440 - app.main - INFO - CORELIA API started successfully
+INFO:     Application startup complete.
+2025-11-23 09:15:06,611 - app.routers.inventory - INFO - Retrieved 10 inventory items for user rish2705@gmail.com
+✅ Loaded 1000 stores from Delhi NCR CSV
+✅ Chatbot agent initialized with API key
+✅ Connected to MongoDB: corelia
+✅ Database indexes created successfully
+INFO:     127.0.0.1:58711 - "GET /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:15:08,016 - app.routers.inventory - INFO - Deducted 1 of 'Milk 1L' from shop SHP12734. Stock: 10 → 9
+2025-11-23 09:15:08,018 - app.routers.inventory - INFO - Deducted 1 of 'Milk 1L' from shop SHP12734. Stock: 9 → 8
+2025-11-23 09:15:08,020 - app.routers.inventory - INFO - Deducted 1 of 'Tomatoes 1kg' from shop SHP12734. Stock: 20 → 19
+INFO:     127.0.0.1:58711 - "POST /api/inventory/deduct-stock HTTP/1.1" 200 OK
+2025-11-23 09:15:08,024 - app.routers.inventory - INFO - Received inventory item creation request from rish2705@gmail.com
+2025-11-23 09:15:08,024 - app.routers.inventory - INFO - Item data: {'name': 'Milk 1L', 'category': 'Dairy', 'price': 3.99, 'stock': 1, 'unit': 'pcs', 'shop_name': 'Urban Punjab', 'shop_id': 'SHP12734'}
+2025-11-23 09:15:08,025 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Milk 1L' (Dairy): 2025-11-30 03:45:08.025023
+2025-11-23 09:15:08,025 - app.routers.inventory - INFO - Creating inventory item 'Milk 1L' at 2025-11-23 03:45:08.025023
+2025-11-23 09:15:08,026 - app.routers.inventory - INFO - Successfully created item with ID: 69228344cd978c9ad482aa18
+INFO:     127.0.0.1:58711 - "POST /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:15:08,029 - app.routers.inventory - INFO - Received inventory item creation request from rish2705@gmail.com
+2025-11-23 09:15:08,029 - app.routers.inventory - INFO - Item data: {'name': 'Milk 1L', 'category': 'Dairy', 'price': 3.99, 'stock': 1, 'unit': 'pcs', 'shop_name': 'Urban Punjab', 'shop_id': 'SHP12734'}
+2025-11-23 09:15:08,029 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Milk 1L' (Dairy): 2025-11-30 03:45:08.029252
+2025-11-23 09:15:08,029 - app.routers.inventory - INFO - Creating inventory item 'Milk 1L' at 2025-11-23 03:45:08.029252
+2025-11-23 09:15:08,029 - app.routers.inventory - INFO - Successfully created item with ID: 69228344cd978c9ad482aa19
+INFO:     127.0.0.1:58711 - "POST /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:15:08,032 - app.routers.inventory - INFO - Received inventory item creation request from rish2705@gmail.com
+2025-11-23 09:15:08,032 - app.routers.inventory - INFO - Item data: {'name': 'Tomatoes 1kg', 'category': 'Produce', 'price': 5.99, 'stock': 1, 'unit': 'pcs', 'shop_name': 'Urban Punjab', 'shop_id': 'SHP12734'}
+2025-11-23 09:15:08,032 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Tomatoes 1kg' (Produce): 2025-11-30 03:45:08.032762
+2025-11-23 09:15:08,032 - app.routers.inventory - INFO - Creating inventory item 'Tomatoes 1kg' at 2025-11-23 03:45:08.032762
+2025-11-23 09:15:08,033 - app.routers.inventory - INFO - Successfully created item with ID: 69228344cd978c9ad482aa1a
+INFO:     127.0.0.1:58711 - "POST /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58711 - "OPTIONS /api/user/bills HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58711 - "POST /api/user/bills HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58711 - "GET /api/user/expiring-items HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58725 - "GET /api/user/expiring-items HTTP/1.1" 200 OK
+2025-11-23 09:15:14,668 - app.routers.inventory - INFO - Retrieved 13 inventory items for user rish2705@gmail.com
+INFO:     127.0.0.1:58724 - "GET /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58729 - "POST /api/auth/login HTTP/1.1" 200 OK
+2025-11-23 09:15:25,333 - app.routers.inventory - INFO - Retrieved 8 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58729 - "GET /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58731 - "GET /api/analytics/top-selling HTTP/1.1" 200 OK
+2025-11-23 09:15:25,336 - app.routers.inventory - INFO - Found 8 expiring items for user ikki@gmail.com
+INFO:     127.0.0.1:58732 - "GET /api/inventory/expiring HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58730 - "GET /api/analytics/seller-stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58737 - "GET /api/user/bills HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58737 - "OPTIONS /api/user/loyalty HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58737 - "GET /api/user/loyalty HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58737 - "GET /api/shops HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58737 - "GET /api/shops/search/by-id/SHP12734 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58737 - "GET /api/shops/search/by-id/SHP12734 HTTP/1.1" 200 OK
+2025-11-23 09:15:50,943 - app.routers.inventory - INFO - Deducted 2 of 'Milk 1L' from shop SHP12734. Stock: 8 → 6
+2025-11-23 09:15:50,945 - app.routers.inventory - INFO - Deducted 1 of 'Bread White' from shop SHP12734. Stock: 15 → 14
+2025-11-23 09:15:50,946 - app.routers.inventory - INFO - Deducted 1 of 'Milk 1L' from shop SHP12734. Stock: 6 → 5
+2025-11-23 09:15:50,948 - app.routers.inventory - INFO - Deducted 1 of 'Tomatoes 1kg' from shop SHP12734. Stock: 19 → 18
+2025-11-23 09:15:50,949 - app.routers.inventory - INFO - Deducted 1 of 'Eggs 12pk' from shop SHP12734. Stock: 8 → 7
+INFO:     127.0.0.1:58740 - "POST /api/inventory/deduct-stock HTTP/1.1" 200 OK
+2025-11-23 09:15:50,953 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:15:50,954 - app.routers.inventory - INFO - Item data: {'name': 'Milk 1L', 'category': 'Dairy', 'price': 3.99, 'stock': 2, 'unit': 'pcs', 'shop_name': 'Urban Punjab', 'shop_id': 'SHP12734'}
+2025-11-23 09:15:50,954 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Milk 1L' (Dairy): 2025-11-30 03:45:50.954106
+2025-11-23 09:15:50,954 - app.routers.inventory - INFO - Creating inventory item 'Milk 1L' at 2025-11-23 03:45:50.954106
+2025-11-23 09:15:50,954 - app.routers.inventory - INFO - Successfully created item with ID: 6922836ecd978c9ad482aa1c
+INFO:     127.0.0.1:58740 - "POST /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:15:50,957 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:15:50,957 - app.routers.inventory - INFO - Item data: {'name': 'Bread White', 'category': 'Bakery', 'price': 2.49, 'stock': 1, 'unit': 'pcs', 'shop_name': 'Urban Punjab', 'shop_id': 'SHP12734'}
+2025-11-23 09:15:50,958 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Bread White' (Bakery): 2025-11-28 03:45:50.957992
+2025-11-23 09:15:50,958 - app.routers.inventory - INFO - Creating inventory item 'Bread White' at 2025-11-23 03:45:50.957992
+2025-11-23 09:15:50,959 - app.routers.inventory - INFO - Successfully created item with ID: 6922836ecd978c9ad482aa1d
+INFO:     127.0.0.1:58740 - "POST /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:15:50,962 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:15:50,962 - app.routers.inventory - INFO - Item data: {'name': 'Milk 1L', 'category': 'Dairy', 'price': 3.99, 'stock': 1, 'unit': 'pcs', 'shop_name': 'Urban Punjab', 'shop_id': 'SHP12734'}
+2025-11-23 09:15:50,962 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Milk 1L' (Dairy): 2025-11-30 03:45:50.962341
+2025-11-23 09:15:50,962 - app.routers.inventory - INFO - Creating inventory item 'Milk 1L' at 2025-11-23 03:45:50.962341
+2025-11-23 09:15:50,963 - app.routers.inventory - INFO - Successfully created item with ID: 6922836ecd978c9ad482aa1e
+INFO:     127.0.0.1:58740 - "POST /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:15:50,965 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:15:50,965 - app.routers.inventory - INFO - Item data: {'name': 'Tomatoes 1kg', 'category': 'Produce', 'price': 5.99, 'stock': 1, 'unit': 'pcs', 'shop_name': 'Urban Punjab', 'shop_id': 'SHP12734'}
+2025-11-23 09:15:50,965 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Tomatoes 1kg' (Produce): 2025-11-30 03:45:50.965372
+2025-11-23 09:15:50,965 - app.routers.inventory - INFO - Creating inventory item 'Tomatoes 1kg' at 2025-11-23 03:45:50.965372
+2025-11-23 09:15:50,965 - app.routers.inventory - INFO - Successfully created item with ID: 6922836ecd978c9ad482aa1f
+INFO:     127.0.0.1:58740 - "POST /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:15:50,967 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:15:50,967 - app.routers.inventory - INFO - Item data: {'name': 'Eggs 12pk', 'category': 'Dairy', 'price': 4.99, 'stock': 1, 'unit': 'pcs', 'shop_name': 'Urban Punjab', 'shop_id': 'SHP12734'}
+2025-11-23 09:15:50,967 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Eggs 12pk' (Dairy): 2025-11-30 03:45:50.967776
+2025-11-23 09:15:50,967 - app.routers.inventory - INFO - Creating inventory item 'Eggs 12pk' at 2025-11-23 03:45:50.967776
+2025-11-23 09:15:50,968 - app.routers.inventory - INFO - Successfully created item with ID: 6922836ecd978c9ad482aa20
+INFO:     127.0.0.1:58740 - "POST /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58740 - "POST /api/user/bills HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58740 - "GET /api/user/expiring-items HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58740 - "OPTIONS /api/analytics/seller-stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58742 - "OPTIONS /api/analytics/top-selling HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58742 - "GET /api/analytics/top-selling HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58740 - "GET /api/analytics/seller-stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58742 - "GET /api/user/bills HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58747 - "GET /api/analytics/seller-stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58748 - "GET /api/analytics/top-selling HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58762 - "GET /api/analytics/top-selling HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58761 - "GET /api/analytics/seller-stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58766 - "GET /api/analytics/seller-stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58767 - "GET /api/analytics/top-selling HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58774 - "GET /api/analytics/seller-stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58775 - "GET /api/analytics/top-selling HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58774 - "OPTIONS /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58784 - "OPTIONS /api/inventory/expiring HTTP/1.1" 200 OK
+2025-11-23 09:17:56,426 - app.routers.inventory - INFO - Retrieved 13 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58774 - "GET /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58775 - "GET /api/analytics/seller-stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58783 - "GET /api/analytics/top-selling HTTP/1.1" 200 OK
+2025-11-23 09:17:56,429 - app.routers.inventory - INFO - Found 13 expiring items for user ikki@gmail.com
+INFO:     127.0.0.1:58784 - "GET /api/inventory/expiring HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58787 - "GET /api/analytics/seller-stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58788 - "GET /api/analytics/top-selling HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58798 - "GET /api/analytics/seller-stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58799 - "GET /api/analytics/top-selling HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58811 - "GET /api/analytics/seller-stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58812 - "GET /api/analytics/top-selling HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58820 - "GET /api/analytics/seller-stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58821 - "GET /api/analytics/top-selling HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58820 - "GET /api/analytics/seller-stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58821 - "GET /api/analytics/top-selling HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58830 - "OPTIONS /api/user/expiring-items HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58830 - "GET /api/user/expiring-items HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58839 - "GET /api/user/expiring-items HTTP/1.1" 200 OK
+2025-11-23 09:19:59,335 - app.routers.inventory - INFO - Retrieved 13 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58830 - "GET /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:19:59,337 - app.routers.inventory - INFO - Found 13 expiring items for user ikki@gmail.com
+INFO:     127.0.0.1:58840 - "GET /api/inventory/expiring HTTP/1.1" 200 OK
+2025-11-23 09:20:06,692 - app.routers.inventory - INFO - Retrieved 13 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58842 - "GET /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58851 - "GET /api/analytics/seller-stats HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:58852 - "GET /api/analytics/top-selling HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:58864 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58864 - "POST /api/auth/login HTTP/1.1" 200 OK
+2025-11-23 09:20:53,007 - app.routers.inventory - INFO - Retrieved 13 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58864 - "GET /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58865 - "GET /api/analytics/seller-stats HTTP/1.1" 200 OK
+2025-11-23 09:20:53,009 - app.routers.inventory - INFO - Found 13 expiring items for user ikki@gmail.com
+INFO:     127.0.0.1:58867 - "GET /api/inventory/expiring HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58866 - "GET /api/analytics/top-selling HTTP/1.1" 200 OK
+2025-11-23 09:21:04,756 - app.routers.inventory - INFO - Retrieved 13 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58869 - "GET /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58871 - "OPTIONS /api/inventory/expiry-info/Dai HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58871 - "GET /api/inventory/expiry-info/Dai HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58871 - "OPTIONS /api/inventory/expiry-info/Dair HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58871 - "GET /api/inventory/expiry-info/Dair HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58871 - "OPTIONS /api/inventory/expiry-info/Dairy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58871 - "GET /api/inventory/expiry-info/Dairy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58875 - "OPTIONS /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:21:31,332 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:21:31,332 - app.routers.inventory - INFO - Item data: {'name': 'Paneer', 'category': 'Dairy', 'price': '300', 'stock': '80', 'unit': '1kg', 'expiry_date': ''}
+2025-11-23 09:21:31,332 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Paneer' (Dairy): 2025-11-30 03:51:31.332405
+2025-11-23 09:21:31,332 - app.routers.inventory - INFO - Creating inventory item 'Paneer' at 2025-11-23 03:51:31.332405
+2025-11-23 09:21:31,334 - app.routers.inventory - INFO - Successfully created item with ID: 692284c3cd978c9ad482aa22
+INFO:     127.0.0.1:58875 - "POST /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:21:31,350 - app.routers.inventory - INFO - Retrieved 14 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58875 - "GET /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:21:34,756 - app.routers.inventory - INFO - Retrieved 14 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58875 - "GET /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58881 - "OPTIONS /api/inventory/ocr-scan HTTP/1.1" 200 OK
+2025-11-23 09:21:46,922 - app.routers.inventory - INFO - OCR scan started by ikki@gmail.com for file: CORELIA HACKHATCH caffeineAddicts.pdf
+2025-11-23 09:21:46,923 - app.routers.inventory - INFO - File size: 112673 bytes
+2025-11-23 09:21:46,923 - app.routers.inventory - INFO - Starting OCR text extraction...
+2025-11-23 09:21:46,923 - app.utils.ocr_service - INFO - Starting OCR processing on 112673 bytes
+2025-11-23 09:21:46,974 - app.utils.ocr_service - ERROR - OCR Processing Error: cannot identify image file <_io.BytesIO object at 0x1203764d0>
+Traceback (most recent call last):
+  File "/Users/riishabhjain/Desktop/HACK_HATCH_FS/HackHatch-Corelia/backend/app/utils/ocr_service.py", line 46, in process_image
+    image = Image.open(io.BytesIO(image_bytes))
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/PIL/Image.py", line 3580, in open
+    raise UnidentifiedImageError(msg)
+PIL.UnidentifiedImageError: cannot identify image file <_io.BytesIO object at 0x1203764d0>
+2025-11-23 09:21:46,976 - app.routers.inventory - WARNING - OCR failed: cannot identify image file <_io.BytesIO object at 0x1203764d0>. Using mock data.
+INFO:     127.0.0.1:58881 - "POST /api/inventory/ocr-scan HTTP/1.1" 200 OK
+2025-11-23 09:21:49,709 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:21:49,709 - app.routers.inventory - INFO - Item data: {'name': 'Milk 1L', 'category': 'Dairy', 'price': 3.99, 'stock': 10, 'unit': 'pcs'}
+2025-11-23 09:21:49,709 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Milk 1L' (Dairy): 2025-11-30 03:51:49.709694
+2025-11-23 09:21:49,709 - app.routers.inventory - INFO - Creating inventory item 'Milk 1L' at 2025-11-23 03:51:49.709694
+2025-11-23 09:21:49,710 - app.routers.inventory - INFO - Successfully created item with ID: 692284d5cd978c9ad482aa23
+INFO:     127.0.0.1:58881 - "POST /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:21:49,715 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:21:49,716 - app.routers.inventory - INFO - Item data: {'name': 'Bread White', 'category': 'Bakery', 'price': 2.49, 'stock': 15, 'unit': 'pcs'}
+2025-11-23 09:21:49,716 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Bread White' (Bakery): 2025-11-28 03:51:49.716119
+2025-11-23 09:21:49,716 - app.routers.inventory - INFO - Creating inventory item 'Bread White' at 2025-11-23 03:51:49.716119
+2025-11-23 09:21:49,717 - app.routers.inventory - INFO - Successfully created item with ID: 692284d5cd978c9ad482aa24
+INFO:     127.0.0.1:58881 - "POST /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:21:49,722 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:21:49,722 - app.routers.inventory - INFO - Item data: {'name': 'Eggs 12pk', 'category': 'Dairy', 'price': 4.99, 'stock': 8, 'unit': 'pcs'}
+2025-11-23 09:21:49,722 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Eggs 12pk' (Dairy): 2025-11-30 03:51:49.722385
+2025-11-23 09:21:49,722 - app.routers.inventory - INFO - Creating inventory item 'Eggs 12pk' at 2025-11-23 03:51:49.722385
+2025-11-23 09:21:49,723 - app.routers.inventory - INFO - Successfully created item with ID: 692284d5cd978c9ad482aa25
+INFO:     127.0.0.1:58881 - "POST /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:21:49,727 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:21:49,727 - app.routers.inventory - INFO - Item data: {'name': 'Tomatoes 1kg', 'category': 'Produce', 'price': 5.99, 'stock': 20, 'unit': 'pcs'}
+2025-11-23 09:21:49,727 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Tomatoes 1kg' (Produce): 2025-11-30 03:51:49.727308
+2025-11-23 09:21:49,727 - app.routers.inventory - INFO - Creating inventory item 'Tomatoes 1kg' at 2025-11-23 03:51:49.727308
+2025-11-23 09:21:49,728 - app.routers.inventory - INFO - Successfully created item with ID: 692284d5cd978c9ad482aa26
+INFO:     127.0.0.1:58881 - "POST /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:21:52,109 - app.routers.inventory - INFO - Retrieved 18 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58881 - "GET /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:21:52,111 - app.routers.inventory - INFO - Found 18 expiring items for user ikki@gmail.com
+INFO:     127.0.0.1:58889 - "GET /api/inventory/expiring HTTP/1.1" 200 OK
+2025-11-23 09:22:05,640 - app.routers.inventory - INFO - OCR scan started by ikki@gmail.com for file: CORELIA HACKHATCH caffeineAddicts.pdf
+2025-11-23 09:22:05,640 - app.routers.inventory - INFO - File size: 112673 bytes
+2025-11-23 09:22:05,640 - app.routers.inventory - INFO - Starting OCR text extraction...
+2025-11-23 09:22:05,640 - app.utils.ocr_service - INFO - Starting OCR processing on 112673 bytes
+2025-11-23 09:22:05,640 - app.utils.ocr_service - ERROR - OCR Processing Error: cannot identify image file <_io.BytesIO object at 0x12023ade0>
+Traceback (most recent call last):
+  File "/Users/riishabhjain/Desktop/HACK_HATCH_FS/HackHatch-Corelia/backend/app/utils/ocr_service.py", line 46, in process_image
+    image = Image.open(io.BytesIO(image_bytes))
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/PIL/Image.py", line 3580, in open
+    raise UnidentifiedImageError(msg)
+PIL.UnidentifiedImageError: cannot identify image file <_io.BytesIO object at 0x12023ade0>
+2025-11-23 09:22:05,641 - app.routers.inventory - WARNING - OCR failed: cannot identify image file <_io.BytesIO object at 0x12023ade0>. Using mock data.
+INFO:     127.0.0.1:58892 - "POST /api/inventory/ocr-scan HTTP/1.1" 200 OK
+2025-11-23 09:22:07,781 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:22:07,781 - app.routers.inventory - INFO - Item data: {'name': 'Milk 1L', 'category': 'Dairy', 'price': 3.99, 'stock': 10, 'unit': 'pcs'}
+2025-11-23 09:22:07,782 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Milk 1L' (Dairy): 2025-11-30 03:52:07.781988
+2025-11-23 09:22:07,782 - app.routers.inventory - INFO - Creating inventory item 'Milk 1L' at 2025-11-23 03:52:07.781988
+2025-11-23 09:22:07,783 - app.routers.inventory - INFO - Successfully created item with ID: 692284e7cd978c9ad482aa27
+INFO:     127.0.0.1:58892 - "POST /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:22:07,790 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:22:07,790 - app.routers.inventory - INFO - Item data: {'name': 'Bread White', 'category': 'Bakery', 'price': 2.49, 'stock': 15, 'unit': 'pcs'}
+2025-11-23 09:22:07,790 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Bread White' (Bakery): 2025-11-28 03:52:07.790826
+2025-11-23 09:22:07,790 - app.routers.inventory - INFO - Creating inventory item 'Bread White' at 2025-11-23 03:52:07.790826
+2025-11-23 09:22:07,791 - app.routers.inventory - INFO - Successfully created item with ID: 692284e7cd978c9ad482aa28
+INFO:     127.0.0.1:58892 - "POST /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:22:07,796 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:22:07,798 - app.routers.inventory - INFO - Item data: {'name': 'Eggs 12pk', 'category': 'Dairy', 'price': 4.99, 'stock': 8, 'unit': 'pcs'}
+2025-11-23 09:22:07,798 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Eggs 12pk' (Dairy): 2025-11-30 03:52:07.798444
+2025-11-23 09:22:07,798 - app.routers.inventory - INFO - Creating inventory item 'Eggs 12pk' at 2025-11-23 03:52:07.798444
+2025-11-23 09:22:07,799 - app.routers.inventory - INFO - Successfully created item with ID: 692284e7cd978c9ad482aa29
+INFO:     127.0.0.1:58892 - "POST /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:22:07,803 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:22:07,803 - app.routers.inventory - INFO - Item data: {'name': 'Tomatoes 1kg', 'category': 'Produce', 'price': 5.99, 'stock': 20, 'unit': 'pcs'}
+2025-11-23 09:22:07,803 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Tomatoes 1kg' (Produce): 2025-11-30 03:52:07.803926
+2025-11-23 09:22:07,803 - app.routers.inventory - INFO - Creating inventory item 'Tomatoes 1kg' at 2025-11-23 03:52:07.803926
+2025-11-23 09:22:07,804 - app.routers.inventory - INFO - Successfully created item with ID: 692284e7cd978c9ad482aa2a
+INFO:     127.0.0.1:58892 - "POST /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:22:09,927 - app.routers.inventory - INFO - Found 22 expiring items for user ikki@gmail.com
+INFO:     127.0.0.1:58900 - "GET /api/inventory/expiring HTTP/1.1" 200 OK
+2025-11-23 09:22:09,928 - app.routers.inventory - INFO - Retrieved 22 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58892 - "GET /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:22:39,933 - app.routers.inventory - INFO - Retrieved 22 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58904 - "GET /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:23:09,935 - app.routers.inventory - INFO - Retrieved 22 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58908 - "GET /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:23:39,931 - app.routers.inventory - INFO - Retrieved 22 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58910 - "GET /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:24:09,998 - app.routers.inventory - INFO - Retrieved 22 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58915 - "GET /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58921 - "OPTIONS /api/shops/match HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58921 - "POST /api/shops/match HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58923 - "OPTIONS /api/shops HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58923 - "GET /api/shops HTTP/1.1" 200 OK
+2025-11-23 09:24:40,087 - app.routers.inventory - INFO - Retrieved 22 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58923 - "GET /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58923 - "OPTIONS /api/shops/DEL10013 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58923 - "GET /api/shops/DEL10013 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58925 - "OPTIONS /api/reviews/all?limit=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58926 - "OPTIONS /api/reviews/stats HTTP/1.1" 200 OK
+2025-11-23 09:25:04,009 - app.routers.reviews - INFO - Retrieved 20 recent reviews
+INFO:     127.0.0.1:58925 - "GET /api/reviews/all?limit=20 HTTP/1.1" 200 OK
+2025-11-23 09:25:04,013 - app.routers.reviews - INFO - Retrieved review statistics
+INFO:     127.0.0.1:58926 - "GET /api/reviews/stats HTTP/1.1" 200 OK
+2025-11-23 09:25:06,701 - app.routers.inventory - INFO - Retrieved 22 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58925 - "GET /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:25:10,185 - app.routers.inventory - INFO - Retrieved 22 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58925 - "GET /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58925 - "GET /api/user/loyalty HTTP/1.1" 200 OK
+2025-11-23 09:25:49,880 - app.routers.inventory - INFO - Retrieved 22 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58928 - "GET /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58931 - "OPTIONS /api/user/bills HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58931 - "GET /api/user/bills HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58933 - "GET /api/shops HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58933 - "OPTIONS /api/shops/DEL10000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58933 - "GET /api/shops/DEL10000 HTTP/1.1" 200 OK
+2025-11-23 09:26:33,271 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:26:33,271 - app.routers.inventory - INFO - Item data: {'name': 'Cadbury Gems (40g)', 'category': 'Grocery', 'price': 25.03, 'stock': 1, 'unit': 'pcs', 'shop_name': 'Omaja Jewelry', 'shop_id': None}
+2025-11-23 09:26:33,272 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Cadbury Gems (40g)' (Grocery): 2025-12-23 03:56:33.271939
+2025-11-23 09:26:33,272 - app.routers.inventory - INFO - Creating inventory item 'Cadbury Gems (40g)' at 2025-11-23 03:56:33.271939
+2025-11-23 09:26:33,274 - app.routers.inventory - INFO - Successfully created item with ID: 692285f1cd978c9ad482aa2b
+INFO:     127.0.0.1:58933 - "POST /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:26:33,279 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:26:33,280 - app.routers.inventory - INFO - Item data: {'name': 'Daal Masoor (1kg)', 'category': 'Grocery', 'price': 111.35, 'stock': 1, 'unit': 'pcs', 'shop_name': 'Omaja Jewelry', 'shop_id': None}
+2025-11-23 09:26:33,280 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Daal Masoor (1kg)' (Grocery): 2025-12-23 03:56:33.280142
+2025-11-23 09:26:33,280 - app.routers.inventory - INFO - Creating inventory item 'Daal Masoor (1kg)' at 2025-11-23 03:56:33.280142
+2025-11-23 09:26:33,281 - app.routers.inventory - INFO - Successfully created item with ID: 692285f1cd978c9ad482aa2c
+INFO:     127.0.0.1:58933 - "POST /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58933 - "OPTIONS /api/user/bills HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58933 - "POST /api/user/bills HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58933 - "GET /api/user/expiring-items HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58933 - "GET /api/shops HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58933 - "OPTIONS /api/shops/DEL10009 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58933 - "GET /api/shops/DEL10009 HTTP/1.1" 200 OK
+2025-11-23 09:26:46,993 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:26:46,993 - app.routers.inventory - INFO - Item data: {'name': 'Surf Excel Easy Wash (1kg)', 'category': 'Grocery', 'price': 135.16, 'stock': 1, 'unit': 'pcs', 'shop_name': 'Manthan Department Store', 'shop_id': None}
+2025-11-23 09:26:46,993 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Surf Excel Easy Wash (1kg)' (Grocery): 2025-12-23 03:56:46.993821
+2025-11-23 09:26:46,993 - app.routers.inventory - INFO - Creating inventory item 'Surf Excel Easy Wash (1kg)' at 2025-11-23 03:56:46.993821
+2025-11-23 09:26:46,995 - app.routers.inventory - INFO - Successfully created item with ID: 692285fecd978c9ad482aa2e
+INFO:     127.0.0.1:58939 - "POST /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:26:47,000 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:26:47,000 - app.routers.inventory - INFO - Item data: {'name': 'Vim Dishwash Bar (155g)', 'category': 'Grocery', 'price': 13.72, 'stock': 1, 'unit': 'pcs', 'shop_name': 'Manthan Department Store', 'shop_id': None}
+2025-11-23 09:26:47,000 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Vim Dishwash Bar (155g)' (Grocery): 2025-12-23 03:56:47.000188
+2025-11-23 09:26:47,000 - app.routers.inventory - INFO - Creating inventory item 'Vim Dishwash Bar (155g)' at 2025-11-23 03:56:47.000188
+2025-11-23 09:26:47,001 - app.routers.inventory - INFO - Successfully created item with ID: 692285ffcd978c9ad482aa2f
+INFO:     127.0.0.1:58939 - "POST /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:26:47,004 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:26:47,004 - app.routers.inventory - INFO - Item data: {'name': 'Himalaya Face Cream', 'category': 'Grocery', 'price': 139.86, 'stock': 1, 'unit': 'pcs', 'shop_name': 'Manthan Department Store', 'shop_id': None}
+2025-11-23 09:26:47,004 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Himalaya Face Cream' (Grocery): 2025-12-23 03:56:47.004498
+2025-11-23 09:26:47,004 - app.routers.inventory - INFO - Creating inventory item 'Himalaya Face Cream' at 2025-11-23 03:56:47.004498
+2025-11-23 09:26:47,005 - app.routers.inventory - INFO - Successfully created item with ID: 692285ffcd978c9ad482aa30
+INFO:     127.0.0.1:58939 - "POST /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:26:47,009 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:26:47,009 - app.routers.inventory - INFO - Item data: {'name': 'Colgate Toothpaste (100g)', 'category': 'Grocery', 'price': 81.34, 'stock': 1, 'unit': 'pcs', 'shop_name': 'Manthan Department Store', 'shop_id': None}
+2025-11-23 09:26:47,009 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Colgate Toothpaste (100g)' (Grocery): 2025-12-23 03:56:47.009705
+2025-11-23 09:26:47,009 - app.routers.inventory - INFO - Creating inventory item 'Colgate Toothpaste (100g)' at 2025-11-23 03:56:47.009705
+2025-11-23 09:26:47,011 - app.routers.inventory - INFO - Successfully created item with ID: 692285ffcd978c9ad482aa31
+INFO:     127.0.0.1:58939 - "POST /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58939 - "POST /api/user/bills HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58939 - "GET /api/user/expiring-items HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58939 - "GET /api/user/bills HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58941 - "OPTIONS /api/user/loyalty HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58941 - "GET /api/user/loyalty HTTP/1.1" 200 OK
+2025-11-23 09:26:56,972 - app.routers.inventory - INFO - Retrieved 28 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58941 - "GET /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58941 - "GET /api/user/bills HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58941 - "GET /api/user/loyalty HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58941 - "GET /api/user/bills HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58941 - "GET /api/user/loyalty HTTP/1.1" 200 OK
+2025-11-23 09:27:10,043 - app.routers.inventory - INFO - Retrieved 28 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58943 - "GET /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:27:10,046 - app.routers.inventory - INFO - Found 22 expiring items for user ikki@gmail.com
+INFO:     127.0.0.1:58944 - "GET /api/inventory/expiring HTTP/1.1" 200 OK
+2025-11-23 09:27:49,047 - app.routers.inventory - INFO - Retrieved 28 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58949 - "GET /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58949 - "GET /api/shops HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58952 - "OPTIONS /api/shops/search/by-id/SHP12734 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58952 - "GET /api/shops/search/by-id/SHP12734 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58952 - "GET /api/shops/search/by-id/SHP12734 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58954 - "OPTIONS /api/inventory/deduct-stock HTTP/1.1" 200 OK
+2025-11-23 09:28:36,733 - app.routers.inventory - INFO - Deducted 1 of 'Milk 1L' from shop SHP12734. Stock: 5 → 4
+2025-11-23 09:28:36,735 - app.routers.inventory - INFO - Deducted 1 of 'Eggs 12pk' from shop SHP12734. Stock: 7 → 6
+2025-11-23 09:28:36,739 - app.routers.inventory - INFO - Deducted 1 of 'Bread White' from shop SHP12734. Stock: 14 → 13
+INFO:     127.0.0.1:58954 - "POST /api/inventory/deduct-stock HTTP/1.1" 200 OK
+2025-11-23 09:28:36,745 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:28:36,745 - app.routers.inventory - INFO - Item data: {'name': 'Milk 1L', 'category': 'Dairy', 'price': 3.99, 'stock': 1, 'unit': 'pcs', 'shop_name': 'Urban Punjab', 'shop_id': 'SHP12734'}
+2025-11-23 09:28:36,745 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Milk 1L' (Dairy): 2025-11-30 03:58:36.745625
+2025-11-23 09:28:36,745 - app.routers.inventory - INFO - Creating inventory item 'Milk 1L' at 2025-11-23 03:58:36.745625
+2025-11-23 09:28:36,747 - app.routers.inventory - INFO - Successfully created item with ID: 6922866ccd978c9ad482aa33
+INFO:     127.0.0.1:58954 - "POST /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:28:36,750 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:28:36,750 - app.routers.inventory - INFO - Item data: {'name': 'Eggs 12pk', 'category': 'Dairy', 'price': 4.99, 'stock': 1, 'unit': 'pcs', 'shop_name': 'Urban Punjab', 'shop_id': 'SHP12734'}
+2025-11-23 09:28:36,751 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Eggs 12pk' (Dairy): 2025-11-30 03:58:36.750987
+2025-11-23 09:28:36,751 - app.routers.inventory - INFO - Creating inventory item 'Eggs 12pk' at 2025-11-23 03:58:36.750987
+2025-11-23 09:28:36,752 - app.routers.inventory - INFO - Successfully created item with ID: 6922866ccd978c9ad482aa34
+INFO:     127.0.0.1:58954 - "POST /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:28:36,755 - app.routers.inventory - INFO - Received inventory item creation request from ikki@gmail.com
+2025-11-23 09:28:36,755 - app.routers.inventory - INFO - Item data: {'name': 'Bread White', 'category': 'Bakery', 'price': 2.49, 'stock': 1, 'unit': 'pcs', 'shop_name': 'Urban Punjab', 'shop_id': 'SHP12734'}
+2025-11-23 09:28:36,755 - app.routers.inventory - INFO - Auto-calculated expiry date for 'Bread White' (Bakery): 2025-11-28 03:58:36.755248
+2025-11-23 09:28:36,755 - app.routers.inventory - INFO - Creating inventory item 'Bread White' at 2025-11-23 03:58:36.755248
+2025-11-23 09:28:36,756 - app.routers.inventory - INFO - Successfully created item with ID: 6922866ccd978c9ad482aa35
+INFO:     127.0.0.1:58954 - "POST /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58954 - "POST /api/user/bills HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58954 - "GET /api/user/loyalty HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58954 - "GET /api/user/expiring-items HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58954 - "GET /api/user/loyalty HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58954 - "GET /api/user/bills HTTP/1.1" 200 OK
+2025-11-23 09:28:44,695 - app.routers.inventory - INFO - Retrieved 31 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58957 - "GET /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58957 - "OPTIONS /api/analytics/seller-stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58958 - "OPTIONS /api/analytics/top-selling HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58957 - "GET /api/analytics/seller-stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58958 - "GET /api/analytics/top-selling HTTP/1.1" 200 OK
+2025-11-23 09:29:07,888 - app.routers.inventory - INFO - Retrieved 31 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58962 - "GET /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:30:06,819 - app.routers.inventory - INFO - Retrieved 31 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58968 - "GET /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58968 - "OPTIONS /api/user/profile HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58968 - "GET /api/user/profile HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58981 - "OPTIONS /api/inventory HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58982 - "OPTIONS /api/inventory/expiring HTTP/1.1" 200 OK
+2025-11-23 09:32:10,145 - app.routers.inventory - INFO - Retrieved 31 inventory items for user ikki@gmail.com
+INFO:     127.0.0.1:58981 - "GET /api/inventory HTTP/1.1" 200 OK
+2025-11-23 09:32:10,147 - app.routers.inventory - INFO - Found 25 expiring items for user ikki@gmail.com
+INFO:     127.0.0.1:58982 - "GET /api/inventory/expiring HTTP/1.1" 200 OK

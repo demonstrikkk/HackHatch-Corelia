@@ -97,7 +97,7 @@ export default function Login() {
             <h2 className={`text-lg mb-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
               Welcome back,
             </h2>
-            <h1 className={`text-3xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>
+            <h1 className={`text-3xl font-bold ${isDark ? 'text-white' : 'text-primary-light'}`}>
               Login to CORELIA
             </h1>
           </div>
@@ -118,8 +118,8 @@ export default function Login() {
                 required
                 className={`w-full h-12 px-4 rounded-lg border transition-colors ${
                   isDark 
-                    ? 'bg-gray-800 border-gray-700 text-white focus:border-blue-500 focus:ring-blue-500' 
-                    : 'bg-white border-gray-200 text-gray-900 focus:border-blue-500 focus:ring-blue-500'
+                    ? 'bg-gray-800 border-gray-700 text-white focus:border-primary-dark focus:ring-primary-dark' 
+                    : 'bg-white border-gray-200 text-primary-light focus:border-primary-dark focus:ring-primary-dark'
                 } focus:outline-none focus:ring-2`}
               />
             </div>
@@ -139,8 +139,8 @@ export default function Login() {
                 required
                 className={`w-full h-12 px-4 rounded-lg border transition-colors ${
                   isDark 
-                    ? 'bg-gray-800 border-gray-700 text-white focus:border-blue-500 focus:ring-blue-500' 
-                    : 'bg-white border-gray-200 text-gray-900 focus:border-blue-500 focus:ring-blue-500'
+                    ? 'bg-gray-800 border-gray-700 text-white focus:border-primary-dark focus:ring-primary-dark' 
+                    : 'bg-white border-gray-200 text-primary-light focus:border-primary-dark focus:ring-primary-dark'
                 } focus:outline-none focus:ring-2`}
               />
             </div>
@@ -149,7 +149,7 @@ export default function Login() {
               <label className="flex items-center cursor-pointer">
                 <input 
                   type="checkbox" 
-                  className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" 
+                  className="w-4 h-4 rounded border-gray-300 text-primary-dark focus:ring-primary-dark" 
                 />
                 <span className={`ml-2 text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                   Remember me
@@ -158,7 +158,7 @@ export default function Login() {
               <a 
                 href="#" 
                 className={`text-sm font-semibold transition-colors ${
-                  isDark ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'
+                  isDark ? 'text-primary-dark hover:text-primary-light' : 'text-primary-dark hover:text-secondary-dark'
                 }`}
               >
                 Forgot password?
@@ -170,7 +170,7 @@ export default function Login() {
               disabled={loading}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className={`w-full h-12 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold rounded-lg shadow-lg transition-all duration-200 ${
+              className={`w-full h-12 bg-primary-light hover:bg-secondary-light text-gray-900 font-semibold rounded-lg shadow-lg transition-all duration-200 ${
                 loading ? 'opacity-50 cursor-not-allowed' : ''
               }`}
             >
@@ -185,8 +185,8 @@ export default function Login() {
                 onClick={() => navigate('/signup')}
                 className={`font-semibold transition-colors ${
                   isDark 
-                    ? 'text-blue-400 hover:text-blue-300 hover:underline' 
-                    : 'text-blue-600 hover:text-blue-700 hover:underline'
+                    ? 'text-primary-dark hover:text-primary-light hover:underline' 
+                    : 'text-primary-dark hover:text-secondary-dark hover:underline'
                 }`}
               >
                 Register here
@@ -200,11 +200,11 @@ export default function Login() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
             className={`mt-6 p-4 rounded-lg ${
-              isDark ? 'bg-blue-900/20 border border-blue-800' : 'bg-blue-50 border border-blue-200'
+              isDark ? 'bg-surface-dark/20 border border-secondary-dark' : 'bg-surface-light border border-primary-light'
             }`}
           >
             <p className={`text-sm font-semibold mb-2 ${
-              isDark ? 'text-blue-400' : 'text-blue-600'
+              isDark ? 'text-primary-dark' : 'text-primary-dark'
             }`}>
               Demo Credentials:
             </p>
@@ -216,7 +216,7 @@ export default function Login() {
         </div>
 
         {/* Right Side - Auto-scrolling Images */}
-        <div className="hidden md:block flex-1 relative bg-gradient-to-br from-blue-500 to-purple-600 min-h-[500px] rounded-r-2xl overflow-hidden">
+        <div className="hidden md:block flex-1 relative bg-primary-light min-h-[500px] rounded-r-2xl overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentImageIndex}
@@ -279,7 +279,7 @@ export default function Login() {
       <div className="absolute top-6 left-10 flex items-center gap-3 z-20">
         <img src="/images-corelia/logo.png" alt="CORELIA" className="w-10 h-10 object-contain" />
         <span className={`font-bold text-2xl bg-gradient-to-r ${
-          isDark ? 'from-blue-400 via-purple-400 to-pink-400' : 'from-blue-600 via-purple-600 to-pink-600'
+          isDark ? 'from-secondary-dark via-accent-dark to-primary-dark' : 'from-secondary-dark via-accent-dark to-orange-dark'
         } bg-clip-text text-transparent`}>
           CORELIA
         </span>
@@ -291,7 +291,7 @@ export default function Login() {
         className={`absolute top-6 right-10 z-20 p-3 rounded-full transition-all ${
           isDark 
             ? 'bg-gray-800 hover:bg-gray-700 text-yellow-400' 
-            : 'bg-white hover:bg-gray-100 text-gray-800 shadow-lg'
+            : 'bg-white hover:bg-gray-100 text-gray-900 shadow-lg'
         }`}
       >
         {isDark ? '☀️' : '🌙'}

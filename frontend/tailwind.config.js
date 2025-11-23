@@ -9,25 +9,27 @@ export default {
     extend: {
       colors: {
         primary: {
-          light: '#14B8A6',  // Teal
-          dark: '#0D9488',   // Darker Teal
+          light: '#D2BD96',  // Beige
+          dark: '#CE653B',   // Orange from gradient
         },
         secondary: {
-          light: '#EC4899',  // Magenta
-          dark: '#DB2777',   // Darker Magenta
+          light: '#B8A67D',  // Darker beige
+          dark: '#2B0948',   // Purple from gradient
         },
         accent: {
-          light: '#F59E0B',  // Gold
-          dark: '#D97706',   // Darker Gold
+          light: '#E5D9C1',  // Light beige
+          dark: '#8B4E8B',   // Mid purple-orange
         },
         background: {
-          light: '#FAFAFA',  // Soft white
-          dark: '#0F172A',   // Slate dark
+          light: '#FAFDF3',  // Off-white
+          dark: '#2B0948',   // Purple base
         },
         surface: {
-          light: '#FFFFFF',  // Pure white
-          dark: '#1E293B',   // Lighter slate
+          light: '#FAFDF3',  // Off-white
+          dark: '#3D1556',   // Lighter purple
         },
+        'purple-dark': '#2B0948',
+        'orange-dark': '#CE653B',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

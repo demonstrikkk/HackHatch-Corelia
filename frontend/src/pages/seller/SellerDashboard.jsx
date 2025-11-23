@@ -14,8 +14,50 @@ import {
 export default function SellerDashboard() {
   const { theme } = useThemeStore()
   const isDark = theme === 'dark'
-  const [stats, setStats] = useState({ revenue: 12450, orders: 234, customers: 156, growth: 12.5 })
-  const [loading, setLoading] = useState(false)
+  const [stats, setStats] = useState({ 
+    shop_id: '', 
+    shop_name: 'My Shop',
+    total_revenue: 0, 
+    total_sales: 0, 
+    total_orders: 0, 
+    today_revenue: 0,
+    today_orders: 0,
+    week_revenue: 0,
+    average_order_value: 0
+  })
+  const [loading, setLoading] = useState(true)
+  const [topProducts, setTopProducts] = useState([])
+
+  useEffect(() => {
+    loadSellerStats()
+    loadTopProducts()
+    // Refresh every 30 seconds
+    const interval = setInterval(() => {
+      loadSellerStats()
+      loadTopProducts()
+    }, 30000)
+    return () => clearInterval(interval)
+  }, [])
+
+  const loadSellerStats = async () => {
+    try {
+      const response = await analyticsAPI.getSellerStats()
+      setStats(response.data)
+    } catch (error) {
+      console.error('Failed to load seller stats:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const loadTopProducts = async () => {
+    try {
+      const response = await analyticsAPI.getTopSelling()
+      setTopProducts(response.data.products || [])
+    } catch (error) {
+      console.error('Failed to load top products:', error)
+    }
+  }
 
   const revenueData = [
     { name: 'Mon', revenue: 1200 },
@@ -27,19 +69,11 @@ export default function SellerDashboard() {
     { name: 'Sun', revenue: 2400 },
   ]
 
-  const topProducts = [
-    { name: 'Milk', sales: 145 },
-    { name: 'Bread', sales: 132 },
-    { name: 'Eggs', sales: 98 },
-    { name: 'Chicken', sales: 87 },
-    { name: 'Rice', sales: 76 },
-  ]
-
   const statCards = [
-    { title: 'Total Revenue', value: `$${stats.revenue.toLocaleString()}`, icon: CurrencyDollarIcon, color: 'from-green-500 to-emerald-600', change: '+12.5%' },
-    { title: 'Total Orders', value: stats.orders, icon: ShoppingBagIcon, color: 'from-blue-500 to-blue-600', change: '+8.3%' },
-    { title: 'Customers', value: stats.customers, icon: UsersIcon, color: 'from-purple-500 to-purple-600', change: '+15.2%' },
-    // { title: 'Growth Rate', value: `${stats.growth}%`, icon: TrendingUpIcon, color: 'from-orange-500 to-red-600', change: '+2.1%' },
+    { title: 'Total Revenue', value: `₹${stats.total_revenue.toLocaleString()}`, icon: CurrencyDollarIcon, color: 'from-primary-light to-secondary-light', change: `Today: ₹${stats.today_revenue}` },
+    { title: 'Total Orders', value: stats.total_orders, icon: ShoppingBagIcon, color: 'from-secondary-dark to-primary-dark', change: `Today: ${stats.today_orders}` },
+    { title: 'Items Sold', value: stats.total_sales, icon: UsersIcon, color: 'from-secondary-dark to-primary-dark', change: `Week: ₹${stats.week_revenue}` },
+    { title: 'Avg Order', value: `₹${stats.average_order_value.toLocaleString()}`, icon: CurrencyDollarIcon, color: 'from-primary-light to-secondary-light', change: stats.shop_id },
   ]
 
   return (
@@ -50,7 +84,7 @@ export default function SellerDashboard() {
         animate={{ opacity: 1, y: 0 }}
       >
         <h1 className={`text-3xl md:text-4xl font-bold mb-2 ${
-          isDark ? 'text-white' : 'text-gray-900'
+          isDark ? 'text-white' : 'text-primary-light'
         }`}>
           Seller Dashboard 📊
         </h1>
@@ -78,14 +112,14 @@ export default function SellerDashboard() {
                 <div className={`p-3 rounded-lg bg-gradient-to-r ${stat.color}`}>
                   <Icon className="w-6 h-6 text-white" />
                 </div>
-                <div className="px-2 py-1 rounded-full bg-green-500/20 text-green-500 text-xs font-medium">
+                <div className="px-2 py-1 rounded-full bg-primary-light/20 text-primary-light text-xs font-medium">
                   {stat.change}
                 </div>
               </div>
               <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'} mb-1`}>
                 {stat.title}
               </p>
-              <p className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <p className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-primary-light'}`}>
                 {stat.value}
               </p>
             </motion.div>
@@ -104,7 +138,7 @@ export default function SellerDashboard() {
             isDark ? 'bg-gray-900 border border-gray-800' : 'bg-white border border-gray-200'
           } shadow-lg`}
         >
-          <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+          <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-primary-light'}`}>
             Weekly Revenue
           </h2>
           <ResponsiveContainer width="100%" height={250}>
@@ -134,7 +168,7 @@ export default function SellerDashboard() {
             isDark ? 'bg-gray-900 border border-gray-800' : 'bg-white border border-gray-200'
           } shadow-lg`}
         >
-          <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+          <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-primary-light'}`}>
             Top Selling Products
           </h2>
           <ResponsiveContainer width="100%" height={250}>
@@ -164,7 +198,7 @@ export default function SellerDashboard() {
           isDark ? 'bg-gray-900 border border-gray-800' : 'bg-white border border-gray-200'
         } shadow-lg`}
       >
-        <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+        <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-primary-light'}`}>
           Recent Orders
         </h2>
         <div className="space-y-3">
@@ -176,7 +210,7 @@ export default function SellerDashboard() {
               }`}
             >
               <div>
-                <p className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                <p className={`font-semibold ${isDark ? 'text-white' : 'text-primary-light'}`}>
                   Order #{1000 + order}
                 </p>
                 <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -184,15 +218,15 @@ export default function SellerDashboard() {
                 </p>
               </div>
               <div className="text-right">
-                <p className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                  ${(45.99 * order).toFixed(2)}
+                <p className={`font-semibold ${isDark ? 'text-white' : 'text-primary-light'}`}>
+                  ₹{(45.99 * order).toFixed(2)}
                 </p>
                 <div className={`text-xs px-2 py-1 rounded-full inline-block ${
                   order % 3 === 0
-                    ? 'bg-green-500/20 text-green-500'
+                    ? 'bg-primary-light/20 text-primary-light'
                     : order % 3 === 1
                     ? 'bg-yellow-500/20 text-yellow-500'
-                    : 'bg-blue-500/20 text-blue-500'
+                    : 'bg-primary-dark/20 text-primary-dark'
                 }`}>
                   {order % 3 === 0 ? 'Delivered' : order % 3 === 1 ? 'Pending' : 'Processing'}
                 </div>

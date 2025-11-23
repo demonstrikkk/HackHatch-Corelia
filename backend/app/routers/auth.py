@@ -3,8 +3,14 @@ from app.schemas import UserCreate, UserLogin, Token, UserResponse
 from app.database import get_database
 from app.utils.auth import get_password_hash, verify_password, create_access_token, create_refresh_token
 from datetime import datetime
+import random
+import string
 
 router = APIRouter()
+
+def generate_shop_id():
+    """Generate unique 8-character shop ID (e.g., SHP12345)"""
+    return 'SHP' + ''.join(random.choices(string.digits, k=5))
 
 @router.post("/signup", response_model=dict)
 async def signup(user: UserCreate, db = Depends(get_database)):
@@ -21,6 +27,18 @@ async def signup(user: UserCreate, db = Depends(get_database)):
     user_dict["password"] = get_password_hash(user.password)
     user_dict["created_at"] = datetime.utcnow()
     user_dict["loyalty_points"] = 0
+    
+    # Generate unique shop_id for sellers
+    if user.role == "seller":
+        # Generate unique shop ID
+        while True:
+            shop_id = generate_shop_id()
+            existing_shop = await db.users.find_one({"shop_id": shop_id})
+            if not existing_shop:
+                break
+        user_dict["shop_id"] = shop_id
+        user_dict["total_sales"] = 0
+        user_dict["total_revenue"] = 0.0
     
     result = await db.users.insert_one(user_dict)
     

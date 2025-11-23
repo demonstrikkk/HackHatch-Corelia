@@ -50,7 +50,7 @@ export default function Sidebar() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`fixed top-4 left-4 z-50 lg:hidden p-2 rounded-lg ${
-          isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
+          isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
         } shadow-lg`}
       >
         {isOpen ? <XMarkIcon className="w-6 h-6" /> : <Bars3Icon className="w-6 h-6" />}
@@ -74,13 +74,13 @@ export default function Sidebar() {
         initial={false}
         animate={{ x: isOpen || window.innerWidth >= 1024 ? 0 : -256 }}
         className={`fixed top-0 left-0 h-screen w-64 z-40 ${
-          isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'
+          isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'
         } shadow-xl flex flex-col`}
       >
         {/* Logo */}
         <div className="p-6 border-b border-gray-700">
           <h1 className={`text-2xl font-bold bg-gradient-to-r ${
-            isDark ? 'from-blue-400 to-purple-500' : 'from-blue-500 to-purple-600'
+            isDark ? 'from-purple-dark to-orange-dark' : 'from-purple-dark to-orange-dark'
           } bg-clip-text text-transparent`}>
             CORELIA
           </h1>
@@ -101,8 +101,8 @@ export default function Sidebar() {
                     className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
                       isActive
                         ? isDark
-                          ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
-                          : 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg'
+                          ? 'bg-primary-light text-gray-900 shadow-lg'
+                          : 'bg-primary-light text-gray-900 shadow-lg'
                         : isDark
                         ? 'hover:bg-gray-800 text-gray-300'
                         : 'hover:bg-gray-100 text-gray-700'
@@ -119,15 +119,19 @@ export default function Sidebar() {
 
         {/* Footer */}
         <div className={`p-4 border-t ${isDark ? 'border-gray-800' : 'border-gray-200'}`}>
-          <div className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-blue-500/10 to-purple-500/10">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold">
+          <Link
+            to="/profile"
+            onClick={() => setIsOpen(false)}
+            className="flex items-center gap-3 p-3 rounded-lg bg-surface-light hover:bg-primary-light/20 transition-all cursor-pointer group"
+          >
+            <div className="w-10 h-10 rounded-full bg-primary-light flex items-center justify-center text-gray-900 font-bold group-hover:scale-110 transition-transform">
               {user?.name?.charAt(0) || 'U'}
             </div>
             <div className="flex-1 min-w-0">
               <p className="font-medium truncate">{user?.name || 'User'}</p>
               <p className="text-xs text-gray-500 capitalize">{user?.role || 'customer'}</p>
             </div>
-          </div>
+          </Link>
         </div>
       </motion.aside>
     </>

@@ -3,10 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --primary-light: #4B9EFF;
-  --primary-dark: #7A5CFF;
-  --bg-light: #F8F9FA;
-  --bg-dark: #0B0F19;
+  --primary-light: #D2BD96;
+  --primary-dark: #CE653B;
+  --bg-light: #FAFDF3;
+  --bg-dark: #2B0948;
+  --gradient-from: #2B0948;
+  --gradient-to: #CE653B;
+}
+
+.dark {
+  background: linear-gradient(90deg, hsla(272, 78%, 16%, 1) 0%, hsla(17, 60%, 52%, 1) 100%);
 }
 
 * {
@@ -53,4 +59,22 @@ code {
 
 .dark ::-webkit-scrollbar-thumb:hover {
   background: #666;
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, Opera */
+}
+
+/* Line clamp utility */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

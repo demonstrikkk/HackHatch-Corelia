@@ -158,32 +158,32 @@ export default function Home() {
       title: 'Smart Matcher',
       description: 'Find perfect shops for your list',
       link: '/shop-matcher',
-      gradient: 'from-blue-500 via-blue-600 to-indigo-600',
-      shadow: 'shadow-blue-500/50',
+      gradient: 'from-secondary-dark via-accent-dark to-primary-dark',
+      shadow: 'shadow-primary-dark/50',
     },
     {
       icon: ClockIcon,
       title: 'Expiring Items',
       description: `${expiringItems.length} items need attention`,
-      link: '#expiring',
-      gradient: 'from-orange-500 via-red-500 to-pink-600',
-      shadow: 'shadow-orange-500/50',
+      link: '/expiring-items',
+      gradient: 'from-primary-light via-primary-light to-orange-dark',
+      shadow: 'shadow-primary-light/50',
     },
     {
       icon: SparklesIcon,
       title: 'Shop Directory',
       description: 'Discover local stores',
       link: '/shops',
-      gradient: 'from-purple-500 via-violet-600 to-purple-700',
-      shadow: 'shadow-purple-500/50',
+      gradient: 'from-secondary-dark via-accent-dark to-secondary-dark',
+      shadow: 'shadow-primary-dark/50',
     },
     {
       icon: TrophyIcon,
       title: 'Rewards Hub',
       description: 'Your loyalty points',
       link: '/loyalty',
-      gradient: 'from-green-500 via-emerald-600 to-teal-600',
-      shadow: 'shadow-green-500/50',
+      gradient: 'from-primary-light via-secondary-light to-teal-600',
+      shadow: 'shadow-primary-light/50',
     },
   ]
 
@@ -206,10 +206,10 @@ export default function Home() {
         <section className="relative overflow-hidden">
           <div className="absolute inset-0">
             <div className={`absolute top-20 left-10 w-96 h-96 rounded-full blur-3xl opacity-20 ${
-              isDark ? 'bg-blue-500' : 'bg-blue-300'
+              isDark ? 'bg-primary-dark' : 'bg-primary-light'
             }`}></div>
             <div className={`absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl opacity-20 ${
-              isDark ? 'bg-purple-500' : 'bg-purple-300'
+              isDark ? 'bg-primary-dark' : 'bg-primary-light'
             }`}></div>
           </div>
 
@@ -225,22 +225,22 @@ export default function Home() {
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ delay: 0.2 }}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 mb-6"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-light border border-primary-dark/20 mb-6"
                 >
-                  <BoltIcon className="w-5 h-5 text-blue-500" />
-                  <span className={`text-sm font-semibold ${isDark ? 'text-blue-400' : 'text-blue-600'}`}>
+                  <BoltIcon className="w-5 h-5 text-primary-dark" />
+                  <span className={`text-sm font-semibold ${isDark ? 'text-primary-dark' : 'text-primary-dark'}`}>
                     AI-Powered Shopping Assistant
                   </span>
                 </motion.div>
 
                 <h1 className={`text-4xl md:text-6xl font-bold mb-4 ${
-                  isDark ? 'text-white' : 'text-gray-900'
+                  isDark ? 'text-white' : 'text-primary-light'
                 }`}>
                   Welcome back,{' '}
-                  <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                  <span className="bg-black bg-clip-text text-transparent">
                     {user?.name?.split(' ')[0]}
                   </span>
-                  ! 👋
+                  ! 
                 </h1>
                 
                 <p className={`text-xl md:text-2xl ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-3xl mx-auto`}>
@@ -264,8 +264,8 @@ export default function Home() {
                           : 'bg-white/80 border border-gray-200 shadow-lg'
                       } hover:scale-105 transition-transform duration-300`}
                     >
-                      <Icon className={`w-8 h-8 mb-3 ${isDark ? 'text-blue-400' : 'text-blue-600'}`} />
-                      <p className={`text-3xl font-bold mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                      <Icon className={`w-8 h-8 mb-3 ${isDark ? 'text-primary-dark' : 'text-primary-dark'}`} />
+                      <p className={`text-3xl font-bold mb-1 ${isDark ? 'text-white' : 'text-primary-light'}`}>
                         {stat.value}
                       </p>
                       <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -288,7 +288,7 @@ export default function Home() {
               transition={{ delay: 0.5 }}
               className="mb-8"
             >
-              <h2 className={`text-3xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <h2 className={`text-3xl font-bold mb-2 ${isDark ? 'text-white' : 'text-primary-light'}`}>
                 Quick Actions
               </h2>
               <p className={isDark ? 'text-gray-400' : 'text-gray-600'}>
@@ -324,7 +324,7 @@ export default function Home() {
                           <Icon className="w-8 h-8 text-white" />
                         </div>
                         
-                        <h3 className={`text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                        <h3 className={`text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-primary-light'}`}>
                           {action.title}
                         </h3>
                         
@@ -333,7 +333,7 @@ export default function Home() {
                         </p>
                         
                         <div className={`flex items-center gap-2 text-sm font-semibold ${
-                          isDark ? 'text-blue-400' : 'text-blue-600'
+                          isDark ? 'text-primary-dark' : 'text-primary-dark'
                         } group-hover:gap-3 transition-all`}>
                           Explore
                           <ArrowRightIcon className="w-4 h-4" />
@@ -356,31 +356,43 @@ export default function Home() {
               transition={{ delay: 0.8 }}
               className={`relative overflow-hidden p-8 md:p-12 rounded-3xl backdrop-blur-sm ${
                 isDark 
-                  ? 'bg-gradient-to-br from-orange-900/20 via-red-900/20 to-pink-900/20 border border-orange-500/30' 
-                  : 'bg-gradient-to-br from-orange-50 via-red-50 to-pink-50 border border-orange-200'
+                  ? 'bg-surface-light border border-primary-light/30' 
+                  : 'bg-surface-light border border-primary-light'
               } shadow-2xl`}
             >
               {/* Decorative elements */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-orange-500/10 to-pink-500/10 rounded-full blur-3xl"></div>
+              <div className="absolute top-0 right-0 w-64 h-64 bg-surface-light rounded-full blur-3xl"></div>
               
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-8">
                   <div>
-                    <h2 className={`text-3xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                    <h2 className={`text-3xl font-bold mb-2 ${isDark ? 'text-white' : 'text-primary-light'}`}>
                       Items Expiring Soon ⏰
                     </h2>
                     <p className={`text-lg ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                       Take action to reduce waste and save money
                     </p>
                   </div>
-                  <ClockIcon className={`w-16 h-16 ${isDark ? 'text-orange-400' : 'text-orange-600'} opacity-20`} />
+                  <div className="flex items-center gap-4">
+                    <Link 
+                      to="/expiring-items"
+                      className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+                        isDark 
+                          ? 'bg-primary-light text-white hover:bg-primary-light/90' 
+                          : 'bg-primary-light text-white hover:bg-primary-light/90'
+                      } shadow-lg hover:shadow-xl hover:scale-105`}
+                    >
+                      View All Items
+                    </Link>
+                    <ClockIcon className={`w-16 h-16 ${isDark ? 'text-primary-light' : 'text-secondary-light'} opacity-20`} />
+                  </div>
                 </div>
 
                 {loading ? (
                   <div className="flex flex-col items-center justify-center py-20">
                     <div className="relative">
-                      <div className="animate-spin rounded-full h-16 w-16 border-4 border-orange-500 border-t-transparent"></div>
-                      <div className="absolute inset-0 rounded-full h-16 w-16 border-4 border-pink-500/30"></div>
+                      <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary-light border-t-transparent"></div>
+                      <div className="absolute inset-0 rounded-full h-16 w-16 border-4 border-primary-dark/30"></div>
                     </div>
                     <p className={`mt-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                       Loading your items...
@@ -401,7 +413,7 @@ export default function Home() {
                       >
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
-                            <h4 className={`text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                            <h4 className={`text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-primary-light'}`}>
                               {item.name}
                             </h4>
                             <div className="flex items-center gap-2 mb-3">
@@ -416,9 +428,9 @@ export default function Home() {
                           </div>
                           <div className={`px-4 py-2 rounded-xl text-sm font-bold ${
                             item.daysLeft <= 2
-                              ? 'bg-red-500/20 text-red-500 shadow-lg shadow-red-500/30'
+                              ? 'bg-secondary-light/20 text-secondary-light shadow-lg shadow-secondary-light/30'
                               : item.daysLeft <= 5
-                              ? 'bg-orange-500/20 text-orange-500 shadow-lg shadow-orange-500/30'
+                              ? 'bg-primary-light/20 text-primary-light shadow-lg shadow-primary-light/30'
                               : 'bg-yellow-500/20 text-yellow-500 shadow-lg shadow-yellow-500/30'
                           }`}>
                             {item.daysLeft}d
@@ -455,7 +467,7 @@ export default function Home() {
               transition={{ delay: 1 }}
               className="mb-8"
             >
-              <h2 className={`text-3xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <h2 className={`text-3xl font-bold mb-2 ${isDark ? 'text-white' : 'text-primary-light'}`}>
                 Recommended Shops Nearby
               </h2>
               <p className={isDark ? 'text-gray-400' : 'text-gray-600'}>
@@ -465,9 +477,9 @@ export default function Home() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
-                { name: 'Fresh Mart', distance: '0.8', rating: '4.5', category: 'Groceries', color: 'from-green-500 to-emerald-600' },
-                { name: 'Quick Stop', distance: '1.2', rating: '4.7', category: 'Convenience', color: 'from-blue-500 to-indigo-600' },
-                { name: 'Organic Valley', distance: '1.5', rating: '4.8', category: 'Organic', color: 'from-purple-500 to-pink-600' },
+                { name: 'Fresh Mart', distance: '0.8', rating: '4.5', category: 'Groceries', color: 'from-primary-light to-secondary-light' },
+                { name: 'Quick Stop', distance: '1.2', rating: '4.7', category: 'Convenience', color: 'from-surface-light to-primary-dark' },
+                { name: 'Organic Valley', distance: '1.5', rating: '4.8', category: 'Organic', color: 'from-secondary-dark to-orange-dark' },
               ].map((shop, index) => (
                 <motion.div
                   key={index}
@@ -503,7 +515,7 @@ export default function Home() {
 
                     {/* Shop Info */}
                     <div className="p-6">
-                      <h4 className={`text-xl font-bold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                      <h4 className={`text-xl font-bold mb-3 ${isDark ? 'text-white' : 'text-primary-light'}`}>
                         {shop.name}
                       </h4>
                       
@@ -516,7 +528,7 @@ export default function Home() {
                         </div>
                         
                         <div className={`flex items-center gap-2 text-sm font-semibold ${
-                          isDark ? 'text-blue-400' : 'text-blue-600'
+                          isDark ? 'text-primary-dark' : 'text-primary-dark'
                         } group-hover:gap-3 transition-all`}>
                           Visit
                           <ArrowRightIcon className="w-4 h-4" />
@@ -539,19 +551,19 @@ export default function Home() {
               transition={{ delay: 1.3 }}
               className={`relative overflow-hidden p-12 rounded-3xl backdrop-blur-sm ${
                 isDark 
-                  ? 'bg-gradient-to-br from-blue-900/40 via-purple-900/40 to-pink-900/40 border border-blue-500/30' 
-                  : 'bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 border border-blue-200'
+                  ? 'bg-gradient-to-br from-secondary-dark/40 via-secondary-dark/40 to-secondary-dark/40 border border-primary-dark/30' 
+                  : 'bg-surface-light border border-primary-light'
               } shadow-2xl text-center`}
             >
               {/* Background Pattern */}
               <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-0 left-0 w-40 h-40 bg-blue-500 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-0 right-0 w-40 h-40 bg-purple-500 rounded-full blur-3xl"></div>
+                <div className="absolute top-0 left-0 w-40 h-40 bg-primary-dark rounded-full blur-3xl"></div>
+                <div className="absolute bottom-0 right-0 w-40 h-40 bg-primary-dark rounded-full blur-3xl"></div>
               </div>
               
               <div className="relative z-10">
-                <BoltIcon className={`w-16 h-16 mx-auto mb-6 ${isDark ? 'text-blue-400' : 'text-blue-600'}`} />
-                <h3 className={`text-3xl md:text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                <BoltIcon className={`w-16 h-16 mx-auto mb-6 ${isDark ? 'text-primary-dark' : 'text-primary-dark'}`} />
+                <h3 className={`text-3xl md:text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-primary-light'}`}>
                   Ready to Shop Smarter?
                 </h3>
                 <p className={`text-lg mb-8 ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto`}>
@@ -559,7 +571,7 @@ export default function Home() {
                 </p>
                 <Link
                   to="/shop-matcher"
-                  className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white text-lg font-bold hover:shadow-2xl hover:scale-105 transition-all duration-300 shadow-lg shadow-blue-500/50"
+                  className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-primary-light text-gray-900 text-lg font-bold hover:shadow-2xl hover:scale-105 transition-all duration-300 shadow-lg shadow-primary-dark/50"
                 >
                   Start Smart Shopping
                   <ArrowRightIcon className="w-6 h-6" />

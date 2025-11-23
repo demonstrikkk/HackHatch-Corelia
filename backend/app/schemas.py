@@ -129,3 +129,8 @@ class OCRUploadResponse(BaseModel):
     success: bool
     items: List[dict]
     total_items: int
+
+class StockDeductionItem(BaseModel):
+    shop_id: str
+    name: str
+    quantity: int

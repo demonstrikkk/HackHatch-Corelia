@@ -6,16 +6,75 @@ import random
 
 router = APIRouter()
 
+@router.get("/seller-stats")
+async def get_seller_stats(current_user: str = Depends(get_current_user), db = Depends(get_database)):
+    """Get real-time seller statistics"""
+    # Get seller info
+    seller = await db.users.find_one({"email": current_user, "role": "seller"})
+    
+    if not seller:
+        return {"error": "Not a seller account"}
+    
+    # Get bills for this seller's shop
+    shop_id = seller.get("shop_id")
+    bills = await db.bills.find({"shop_id": shop_id}).to_list(length=None)
+    
+    # Calculate statistics
+    total_sales = seller.get("total_sales", 0)
+    total_revenue = seller.get("total_revenue", 0.0)
+    total_orders = len(bills)
+    
+    # Calculate today's sales
+    today_start = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+    today_bills = [b for b in bills if b.get("purchase_date", datetime.min) >= today_start]
+    today_revenue = sum(b.get("total_amount", 0) for b in today_bills)
+    today_orders = len(today_bills)
+    
+    # Calculate this week's sales
+    week_start = datetime.utcnow() - timedelta(days=7)
+    week_bills = [b for b in bills if b.get("purchase_date", datetime.min) >= week_start]
+    week_revenue = sum(b.get("total_amount", 0) for b in week_bills)
+    
+    return {
+        "shop_id": shop_id,
+        "shop_name": seller.get("shop_name", "My Shop"),
+        "total_sales": total_sales,
+        "total_revenue": round(total_revenue, 2),
+        "total_orders": total_orders,
+        "today_revenue": round(today_revenue, 2),
+        "today_orders": today_orders,
+        "week_revenue": round(week_revenue, 2),
+        "average_order_value": round(total_revenue / total_orders, 2) if total_orders > 0 else 0
+    }
+
 @router.get("/top-selling")
-async def get_top_selling(current_user: str = Depends(get_current_user)):
-    # Mock top selling products
-    products = [
-        {"name": "Milk", "sales": 145, "revenue": 579.55},
-        {"name": "Bread", "sales": 132, "revenue": 328.68},
-        {"name": "Eggs", "sales": 98, "revenue": 489.02},
-        {"name": "Chicken", "sales": 87, "revenue": 1129.13},
-        {"name": "Rice", "sales": 76, "revenue": 1215.24},
-    ]
+async def get_top_selling(current_user: str = Depends(get_current_user), db = Depends(get_database)):
+    """Get top selling products for seller based on real bills"""
+    # Get seller info
+    seller = await db.users.find_one({"email": current_user, "role": "seller"})
+    
+    if not seller:
+        return {"products": []}
+    
+    shop_id = seller.get("shop_id")
+    bills = await db.bills.find({"shop_id": shop_id}).to_list(length=None)
+    
+    # Aggregate product sales
+    product_stats = {}
+    for bill in bills:
+        for item in bill.get("items", []):
+            name = item.get("name")
+            quantity = item.get("quantity", 1)
+            price = item.get("price", 0)
+            
+            if name not in product_stats:
+                product_stats[name] = {"name": name, "sales": 0, "revenue": 0}
+            
+            product_stats[name]["sales"] += quantity
+            product_stats[name]["revenue"] += price * quantity
+    
+    # Sort by sales and get top 5
+    products = sorted(product_stats.values(), key=lambda x: x["sales"], reverse=True)[:5]
     
     return {"products": products}
 
